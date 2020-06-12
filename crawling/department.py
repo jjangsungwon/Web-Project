@@ -12,9 +12,9 @@ soup = BeautifulSoup(req.text, 'html.parser')
 
 # 제목
 title = []
-for i in soup.select('#content > article > article.sub-content.area > div:nth-child(9) > table > tbody > tr > th:nth-child(2)'):
+for i in soup.select('#content > article > article.sub-content.area > div:nth-child(9) > table > tbody > tr > td:nth-child(2)'):
     # print(i.text)
-    title.append(i.text)
+    title.append(i.find("a")['title'])
 
 # 등록일
 date = []
@@ -24,7 +24,7 @@ for i in soup.select('#content > article > article.sub-content.area > div:nth-ch
 
 # 링크
 link = []
-for i in soup.select('#content > article > article.sub-content.area > div:nth-child(9) > table > tbody > tr > th:nth-child(2)'):
+for i in soup.select('#content > article > article.sub-content.area > div:nth-child(9) > table > tbody > tr > td:nth-child(2)'):
     # print(i.find("a")['href'])
     temp = "http://computer.knu.ac.kr/06_sub/02_sub.html" + i.find("a")['href']
     link.append(temp)
