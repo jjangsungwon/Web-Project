@@ -1,0 +1,24 @@
+@font-face{
+	font-family:"NanumSquareRoundB";
+    src:url('../font/NanumSquareRoundB.woff') format('woff');
+    src:url('../font/NanumSquareRoundB.woff2') format('woff2'),
+	    url('../font/NanumSquareRoundB.ttf') format('truetype'),  
+        url('../font/NanumSquareRoundB.eot');
+    font-weight:700;
+}
+
+@font-face{
+	font-family:"NanumSquareRoundR";
+    src:url('../font/NanumSquareRoundR.woff') format('woff');
+    src:url('../font/NanumSquareRoundR.woff2') format('woff2'),
+	    url('../font/NanumSquareRoundR.ttf') format('truetype'),  
+        url('../font/NanumSquareRoundR.eot');
+}
+
+@font-face{
+	font-family:"NanumSquareRoundEB";
+    src:url('../font/NanumSquareRoundEB.woff') format('woff');
+    src:url('../font/NanumSquareRoundEB.woff2') format('woff2'),
+	    url('../font/NanumSquareRoundEB.ttf') format('truetype'),  
+        url('../font/NanumSquareRoundEB.eot');
+}

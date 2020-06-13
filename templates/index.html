@@ -1,10 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<meta charset="utf-8">
+
+<html>
+<meta charset="UTF-8">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <script type="text/javascript" src="../static/js/jquery-3.5.0.min.js"></script>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/font.css" rel="stylesheet" >
+    <title>KNU CSE PUZZLE</title>
+
+    <style>
+        body,
+        p {
+            font-family: "NanumSquareRoundEB";
+            animation: fadein 0.3s;
+        }
+
+        #navBar {
+            padding: .5em;
+            text-align: center;
+            width: 100%;
+            border-bottom: 1px solid rgb(224, 224, 224);
+            border-top:2px solid rgb(217, 220, 231);
+            border-bottom:2px solid rgb(192, 195, 207);
+            background-color:rgb(31, 49, 99)
+        }
+
+        nav ul li {
+            font-family: "NanumSquareRoundEB";
+            font-size: 20px;
+            list-style-type: none;
+            display: inline;
+            border-left: 1px solid lightgray;
+            padding: 0 50px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight:700;
+        }
+
+        a:hover {
+            color: rgb(20, 129, 255);
+            text-decoration: none;
+        }
+        a:focus{
+            color: rgb(20, 129, 255);
+            text-decoration: none;
+        }
+
+        nav ul li:first-child {
+            border-left: none;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<p>initpage</p>
+
+    <div id="content" style="width:100%; margin:0 auto;">
+
+        <!-- 상단 로고 부분 -->
+        <div style="text-align:center">
+        <a href="index.html"><img id="logoImg" src="../static/images/logo.png" width="400" height="150"></a>
+        </div>
+
+        <!-- 상단 내비게이션 부분 -->
+        <div id="navBar">
+            <nav style="margin-top:10px;">
+                <ul>
+                    <!-- iframe 연결 부분 -->
+                    <li><a href="notice.html" target="contentFrame"><i class="fas fa-home"></i> 공지사항</a></li>
+                    <li><a href="mealmenu.html" target="contentFrame"><i class="fab fa-html5"></i> 식단표</a></li>
+                    <li><a href="schoolmap.html" target="contentFrame"><i class="fab fa-css3-alt"></i> 교내 지도</a></li>
+                    <li><a href="sitelink.html" target="contentFrame"><i class="fab fa-js-square"></i> 사이트 링크</a></li>
+                    <li><a href="acainfo.html" target="contentFrame"><i class="fas fa-file-code"></i> 학업 정보</a> 
+                    </li>
+                    <!-- 로그인 정보 출력하기 -->
+                    <span style="font-size:12px; color:white">***님 안녕하세요</span>
+                </ul>
+            </nav>
+        </div>
+
+        <iframe src="notice.html" name="contentFrame"
+            style="overflow-x:hidden; overflow:auto; width:100%; min-height:1100px;" scrolling="yes"
+            frameborder="0"></iframe>
+
+    </div>
+
+
 </body>
+
 </html>

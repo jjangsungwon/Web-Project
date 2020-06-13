@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<html>
+<meta charset="UTF-8">
+
+<head>
+    <script type="text/javascript" src="../static/js/jquery-3.5.0.min.js"></script>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/font.css" rel="stylesheet">
+    <title>KNU CSE PUZZLE</title>
+
+    <style>
+        body,
+        p {
+            font-family: "NanumSquareRoundEB";
+            animation: fadein 0.5s;
+        }
+
+        a {
+            color: gray;
+            text-decoration: none;
+            font-weight:700;
+        }
+
+        li{
+            font-size:15px;
+            line-height:30px;
+            animation: fadein 0.5s;
+        }
+
+        a:hover {
+            color: rgb(0, 14, 31);
+            text-decoration: none;
+        }
+        a:focus{
+            color: rgb(0, 14, 31);
+            text-decoration: none;
+        }
+
+        #banner {
+            width: 100%;
+            height: 150px;
+            max-width: 1400px;
+            background-color: lightgray;
+            margin-bottom: 1em;
+        }
+
+        .newsSection {
+            width: 49%;
+            border: 1px solid lightgray;
+            padding: 10px;
+        }
+
+        @media (max-width: 800px){
+            .newsSection {
+            float: left;
+            width: 100%;
+            border: 1px solid lightgray;
+            padding: 10px;
+        }
+        }
+
+        .newsContentSection{
+            margin-top:15px;
+        }
+
+        .innerSection {
+            padding: 20px;
+        }
+
+        .tabSection>li{
+            display: inline-block;
+            vertical-align: middle;
+            border-right: 1px solid lightgray;
+            padding: 0 7px;
+            font-size:20px;
+        }
+        
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <br>
+
+    <div id="content" style="max-width:1400px; margin:0 auto;">
+        <!-- 페이지 배너 -->
+        <div id="banner">
+            <br>
+            페이지 배너가 들어갈 부분
+        </div>
+        <!-- 뉴스 영역 1(본관, 학부 공지) -->
+        <div id="news1" class="newsSection" style="float:left;">
+            <div class="innerSection">
+                <div class="tabSection">
+                    <ul class="tabSection ul">
+                        <li class="tabSection li">
+                            <a href="#" onclick="news_content1();">
+                                <span style="margin-left:-30px">본관 공지사항</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="news_content2();">
+                                <span>학부 공지사항</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- 본관 혹은 학부 공지 컨텐츠 박스 -->
+                    <div id="news_content1" class="newsContentSection" style="display:block">
+                        <ul>
+                            <li>
+                                [SW중심대학] 2020년 대학생활 멘토링/힐링(Healing) 프로그램 안내
+                            </li>
+                            <li>
+                                ~06/16]2020학년도 하계 유럽대학 Online Summer School 참가
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="news_content2" class="newsContentSection" style="display:none">
+                        <ul>
+                            <li>
+                                [지역선도] Untact직무역량강화프로그램: NCS 및 대기업직무적성 교
+                            </li>
+                            <li>
+                                2020-1학기 장학사정관 장학금 신청 안내
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 뉴스 영역 2(채용정보 공지) -->
+        <div id="news2" class="newsSection" style="float:right">
+            <div class="innerSection">
+                <div class="tabSection">
+                    <ul class="tabSection ul">
+                        <li class="tabSection li">
+                            <a href="#news_content1">
+                                <span style="margin-left:-30px">진로 및 채용정보</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- 본관 혹은 학부 공지 컨텐츠 박스 -->
+                    <div id="news_content3" class="newsContentSection" style="display:block">
+                        <ul>
+                            <li>
+                                [SW중심대학] 2020년 대학생활 멘토링/힐링(Healing) 프로그램 안내
+                            </li>
+                            <li>
+                                ~06/16]2020학년도 하계 유럽대학 Online Summer School 참가
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+var $news_content1 = $('#news_content1');
+var $news_content2 = $('#news_content2');
+var $news_content3 = $('#news_content3');
+
+function news_content1(){
+    $news_content1.css("display","block");
+    $news_content2.css("display","none");
+}
+function news_content2(){
+    $news_content1.css("display","none");
+    $news_content2.css("display","block");
+}
+</script>
+
+</html>
