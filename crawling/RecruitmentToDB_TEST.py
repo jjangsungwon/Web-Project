@@ -5,10 +5,10 @@ from bs4 import BeautifulSoup
 import dbModule
 
 
-def insert(idx, title, data, link):
+def insert(table_name, idx, title, data, link):
     db_class = dbModule.Database()
 
-    sql = 'INSERT INTO Recruitment VALUES(%d, "%s", "%s", "%s")' % (idx, title, data, link)
+    sql = 'INSERT INTO %s VALUES(%d, "%s", "%s", "%s")' % (table_name, idx, title, data, link)
     db_class.execute(sql)
     db_class.commit()
 
@@ -40,7 +40,7 @@ for i in range(len(title)):
     print("Date", date[i])
     print("Link", link[i])
     print("*" * 100)
-    insert(i + 1, title[i], date[i], link[i])
+    insert("Recruitment", i + 1, title[i], date[i], link[i])
 
 print("done")
 
