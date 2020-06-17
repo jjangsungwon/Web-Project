@@ -4,7 +4,6 @@
     순서[강의코드, 개설대학, 과목명, 교과구분, 학점, 학기, 성적]
     단 공백이 있는 경우는 없어짐.
 """
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -12,7 +11,6 @@ LOGIN_URL = 'https://abeek.knu.ac.kr/Keess/comm/support/login/login.action'
 craw_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/list.action'
 design_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/designPart.action'
 must_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/essentPart.action'
-session = requests.session()
 
 params = dict()
 params['user.usr_id'] = 'ID'  # abeek 아이디
