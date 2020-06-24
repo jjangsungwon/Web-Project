@@ -119,22 +119,22 @@
                     <!-- 본관 혹은 학부 공지 컨텐츠 박스 -->
                     <div id="news_content1" class="newsContentSection" style="display:block">
                         <ul>
+                            {% for n in news_title %}
+                            <a href="">
                             <li>
-                                [SW중심대학] 2020년 대학생활 멘토링/힐링(Healing) 프로그램 안내
+                                {{n}}
                             </li>
-                            <li>
-                                ~06/16]2020학년도 하계 유럽대학 Online Summer School 참가
-                            </li>
+                            </a>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div id="news_content2" class="newsContentSection" style="display:none">
                         <ul>
+                            {% for n in news_title %}
                             <li>
-                                [지역선도] Untact직무역량강화프로그램: NCS 및 대기업직무적성 교
+                                {{n}}
                             </li>
-                            <li>
-                                2020-1학기 장학사정관 장학금 신청 안내
-                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
