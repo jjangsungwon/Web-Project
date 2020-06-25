@@ -26,8 +26,8 @@
             top: 0;
             right: 0;
             left: 0;
-            box-shadow: 0 1px 4px 0 rgba(0,0,0,0.1);
-            background-color:white;
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+            background-color: white;
         }
 
         @media (min-width: 992px) {
@@ -41,19 +41,39 @@
                 flex-direction: row;
             }
         }
-
+        
         @media (max-width: 991px) {
             .nav-container {
                 display: none;
             }
         }
-
+   
         .nav-item {
             margin-right: 25px;
             cursor: pointer;
         }
+      
+        .banner-nav-container {
+            text-align:center;
+            font-family: "NanumSquareRoundEB";
+            font-size: 20px;
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            margin-left:-2em;
+        }
+        
+        .banner-nav-item{
+            width:280px;
+            height:40px;
+            line-height: 2em;
+            text-align:center;
+            background-color:white;
+            opacity:.1;
+        }
 
-        .nav-item a {
+        .nav-item, .banner-nav-item a {
             color: gray;
             text-decoration: none;
             font-weight: 700;
@@ -100,10 +120,21 @@
             padding: 15px;
         }
 
+        .banner_nav{
+            margin:-50px 0 auto;
+            z-index:100
+        }
+
+        .banner_img {
+            text-align: center;
+            margin-top: 5em;
+        }
+
         @media (min-width: 992px) {
-            #addingDiv{
-                display:none;
+            #addingDiv {
+                display: none;
             }
+
             .menu_click {
                 display: none;
             }
@@ -132,7 +163,6 @@
     <div id="content" style="width:100%; margin:0 auto;">
 
         <!-- 상단 고정 내비게이션 부분 -->
-
         <nav class="nav-main">
             <!-- 상단 로고 부분 : 좌측에 배치 -->
             <div style="margin-left:30px; margin-right: 30px; float:left">
@@ -162,8 +192,30 @@
             <button id="addingButton" class="menu_click">
                 클릭
             </button>
-
         </nav>
+
+        <!-- 상단 배너 이미지 부분 -->
+        <div class="banner_img">
+            <img style="max-width: 100%" src="../static/images/notice.png">
+
+            <!-- 배너 이미지 내부 내비게이션 -->
+            <div class="banner_nav">
+                <ul class="banner-nav-container">
+                    <li class="banner-nav-item"><a href="/notice" target="contentFrame"><i class="fas fa-home"></i>
+                            공지사항</a></li>
+                    <li class="banner-nav-item"><a href="/mealmenu" target="contentFrame"><i class="fab fa-html5"></i>
+                            식단표</a></li>
+                    <li class="banner-nav-item"><a href="/schoolmap" target="contentFrame"><i class="fab fa-css3-alt"></i>
+                            교내 지도</a></li>
+                    <li class="banner-nav-item"><a href="/sitelink" target="contentFrame"><i class="fab fa-js-square"></i>
+                            사이트 링크</a></li>
+                    <li class="banner-nav-item"><a href="/acainfo" target="contentFrame"><i class="fas fa-file-code"></i>
+                            학업 정보</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
 
         <!-- 크기 줄어들시 출력할 메뉴 div -->
         <div id="addingDiv">
@@ -182,10 +234,10 @@
             </ul>
         </div>
 
-        <!-- 상단 내비게이션 부분 -->
+        <!-- iframe -->
         <div style="display:block">
             <iframe src="/notice" name="contentFrame"
-                style="padding-top:95px; overflow-x:hidden; overflow:auto; width:100%; min-height:1600px;"
+                style="padding-top:1em; overflow-x:hidden; overflow:auto; width:100%; min-height:1600px;"
                 scrolling="yes" frameborder="0"></iframe>
         </div>
 
