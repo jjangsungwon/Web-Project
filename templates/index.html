@@ -14,7 +14,7 @@
         body,
         p {
             font-family: "NanumSquareRoundEB";
-            animation: fadein 0.3s;
+            animation: fadein 0.2s;
         }
 
         .nav-main {
@@ -41,39 +41,85 @@
                 flex-direction: row;
             }
         }
-        
+
         @media (max-width: 991px) {
             .nav-container {
                 display: none;
             }
         }
-   
+
         .nav-item {
             margin-right: 25px;
             cursor: pointer;
         }
-      
+
         .banner-nav-container {
-            text-align:center;
+            text-align: center;
             font-family: "NanumSquareRoundEB";
             font-size: 20px;
             list-style-type: none;
             display: flex;
             justify-content: center;
             flex-direction: row;
-            margin-left:-2em;
-        }
-        
-        .banner-nav-item{
-            width:280px;
-            height:40px;
-            line-height: 2em;
-            text-align:center;
-            background-color:white;
-            opacity:.1;
+            margin-left: -2em;
         }
 
-        .nav-item, .banner-nav-item a {
+        .banner-nav-item {
+            width: 270px;
+            margin-right: 2px;
+            height: 40px;
+            line-height: 2em;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.17));
+            animation: fadein 0.3s;
+        }
+
+        @media (max-width: 991px) {
+            .banner-nav-container {
+                text-align: center;
+                font-family: "NanumSquareRoundEB";
+                font-size: 17px;
+                list-style-type: none;
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+                margin-left: -2em;
+            }
+
+            .banner-nav-item {
+                width: 270px;
+                margin-top:1em;
+                margin-right: 2px;
+                height: 30px;
+                line-height: 2em;
+                text-align: center;
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.17));
+                animation: fadein 0.3s;
+            }
+        }
+
+        .banner-nav-item a {
+            color: black;
+            text-decoration: none;
+            font-weight: 700;
+            opacity: 0.5;
+        }
+
+        .banner-nav-item a:hover {
+            color: white;
+            opacity: 1;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .banner-nav-item a:focus {
+            color: white;
+            opacity: 1;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .nav-item {
             color: gray;
             text-decoration: none;
             font-weight: 700;
@@ -120,9 +166,9 @@
             padding: 15px;
         }
 
-        .banner_nav{
-            margin:-50px 0 auto;
-            z-index:100
+        .banner_nav {
+            margin: -50px 0 auto;
+            z-index: 100
         }
 
         .banner_img {
@@ -136,12 +182,6 @@
             }
 
             .menu_click {
-                display: none;
-            }
-        }
-
-        @media (max-width: 991px) {
-            .login_section {
                 display: none;
             }
         }
@@ -188,47 +228,29 @@
             <div class="login_section">
                 ***님 안녕하세요!
             </div>
-
-            <button id="addingButton" class="menu_click">
-                클릭
-            </button>
         </nav>
 
         <!-- 상단 배너 이미지 부분 -->
         <div class="banner_img">
-            <img style="max-width: 100%" src="../static/images/notice.png">
-
-            <!-- 배너 이미지 내부 내비게이션 -->
-            <div class="banner_nav">
-                <ul class="banner-nav-container">
-                    <li class="banner-nav-item"><a href="/notice" target="contentFrame"><i class="fas fa-home"></i>
-                            공지사항</a></li>
-                    <li class="banner-nav-item"><a href="/mealmenu" target="contentFrame"><i class="fab fa-html5"></i>
-                            식단표</a></li>
-                    <li class="banner-nav-item"><a href="/schoolmap" target="contentFrame"><i class="fab fa-css3-alt"></i>
-                            교내 지도</a></li>
-                    <li class="banner-nav-item"><a href="/sitelink" target="contentFrame"><i class="fab fa-js-square"></i>
-                            사이트 링크</a></li>
-                    <li class="banner-nav-item"><a href="/acainfo" target="contentFrame"><i class="fas fa-file-code"></i>
-                            학업 정보</a>
-                    </li>
-                </ul>
-            </div>
-
+            <img id="bannerImgId" style="margin-top:15px; max-width: 100%;" src="../static/images/notice.png">
         </div>
-
-        <!-- 크기 줄어들시 출력할 메뉴 div -->
-        <div id="addingDiv">
-            <ul>
-                <li><a href="notice.html" target="contentFrame"><i class="fas fa-home"></i>
+        <!-- 배너 이미지 내부 내비게이션 -->
+        <div class="banner_nav">
+            <ul class="banner-nav-container">
+                <li class="banner-nav-item"><a id="nav_li_notice" href="/notice" target="contentFrame"><i
+                            class="fas fa-home"></i>
                         공지사항</a></li>
-                <li><a href="mealmenu.html" target="contentFrame"><i class="fab fa-html5"></i>
+                <li class="banner-nav-item"><a id="nav_li_meal" href="/mealmenu" target="contentFrame"><i
+                            class="fab fa-html5"></i>
                         식단표</a></li>
-                <li><a href="schoolmap.html" target="contentFrame"><i class="fab fa-css3-alt"></i>
+                <li class="banner-nav-item"><a id="nav_li_map" href="/schoolmap" target="contentFrame"><i
+                            class="fab fa-css3-alt"></i>
                         교내 지도</a></li>
-                <li><a href="sitelink.html" target="contentFrame"><i class="fab fa-js-square"></i>
+                <li class="banner-nav-item"><a id="nav_li_link" href="/sitelink" target="contentFrame"><i
+                            class="fab fa-js-square"></i>
                         사이트 링크</a></li>
-                <li><a href="acainfo.html" target="contentFrame"><i class="fas fa-file-code"></i>
+                <li class="banner-nav-item"><a id="nav_li_aca" style="color:rgb(255, 251, 44)" href="/acainfo" target="contentFrame"><i
+                            class="fas fa-file-code"></i>
                         학업 정보</a>
                 </li>
             </ul>
@@ -237,7 +259,7 @@
         <!-- iframe -->
         <div style="display:block">
             <iframe src="/notice" name="contentFrame"
-                style="padding-top:1em; overflow-x:hidden; overflow:auto; width:100%; min-height:1600px;"
+                style="margin-top:1em; overflow-x:hidden; overflow:auto; width:100%; min-height:1600px;"
                 scrolling="yes" frameborder="0"></iframe>
         </div>
 
@@ -248,12 +270,30 @@
 
 <script type="text/javascript">
 
-    var $addingDiv = $('#addingDiv');
-    $addingDiv.hide();
+    var $nav_li_aca = $('#nav_li_aca');
+    var $nav_li_link = $('#nav_li_link');
+    var $nav_li_map = $('#nav_li_map');
+    var $nav_li_meal = $('#nav_li_meal');
+    var $nav_li_notice = $('#nav_li_notice');
 
-    $('#addingButton').click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
-        $addingDiv.slideDown(); // list 라는 id를 가진 div를 slideDown
+    var $bannerImgId = $('#bannerImgId');
+
+    $nav_li_notice.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수   
+        $bannerImgId.attr("src", "../static/images/notice.png");
     });
+    $nav_li_link.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수         
+        $bannerImgId.attr("src", "../static/images/links.png");
+    });
+    $nav_li_aca.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
+        $bannerImgId.attr("src", "../static/images/acainfo.png");
+    });
+    $nav_li_map.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
+        $bannerImgId.attr("src", "../static/images/maps.png");
+    });
+    $nav_li_meal.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
+        $bannerImgId.attr("src", "../static/images/mealmenu.png");
+    });
+
 
 </script>
 
