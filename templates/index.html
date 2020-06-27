@@ -69,7 +69,7 @@
             .banner-nav-container {
                 text-align: center;
                 font-family: "NanumSquareRoundEB";
-                font-size: 15px;
+                font-size: 16px;
                 list-style-type: none;
                 display: flex;
                 justify-content: center;
@@ -91,10 +91,10 @@
         }
 
         .banner-nav-item a {
-            color: black;
+            color: rgb(37, 37, 37);
             text-decoration: none;
             font-weight: 700;
-            opacity: 0.5;
+            opacity: 1;
         }
 
         .banner-nav-item a:hover {
@@ -102,6 +102,7 @@
             opacity: 1;
             text-decoration: none;
             font-weight: 700;
+            transition : color 0.4s;
         }
 
         .banner-nav-item a:focus {
@@ -226,7 +227,7 @@
         <!-- iframe -->
         <div style="display:block">
             <iframe src="/notice" name="contentFrame"
-                style="margin-top:1em; overflow-x:hidden; overflow:auto; width:100%; min-height:1600px;" scrolling="yes"
+                style="margin-top:1em; overflow-x:hidden; overflow:auto; width:100%; min-height:1000px;" scrolling="yes"
                 frameborder="0"></iframe>
         </div>
 
@@ -246,19 +247,19 @@
     var $bannerImgId = $('#bannerImgId');
 
     $nav_li_notice.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수   
-        $bannerImgId.attr("src", "../static/images/notice.png");
+        $bannerImgId.css('opacity','0.7').stop().attr("src", "../static/images/notice.png").animate({opacity:1},300);
     });
     $nav_li_link.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수         
-        $bannerImgId.attr("src", "../static/images/links.png");
+        $bannerImgId.css('opacity','0.7').stop().attr("src", "../static/images/links.png").animate({opacity:1},300);
     });
     $nav_li_aca.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
-        $bannerImgId.attr("src", "../static/images/acainfo.png");
+        $bannerImgId.css('opacity','0.7').stop().attr("src", "../static/images/acainfo.png").animate({opacity:1},300);
     });
     $nav_li_map.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
-        $bannerImgId.attr("src", "../static/images/maps.png");
+        $bannerImgId.css('opacity','0.7').stop().attr("src", "../static/images/maps.png").animate({opacity:1},300);
     });
     $nav_li_meal.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
-        $bannerImgId.attr("src", "../static/images/mealmenu.png");
+        $bannerImgId.css('opacity','0.7').stop().attr("src", "../static/images/mealmenu.png").animate({opacity:1},300);
     });
 
 
