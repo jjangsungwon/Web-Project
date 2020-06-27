@@ -24,7 +24,11 @@
                 <a href="/"><img id="logoImg" src="../static/images/logo.png" width="190" height="51"></a>
             </div>
             <div class="login_section">
-                <i style="color:teal" class="fas fa-user-check"></i> xptmxmtest 님
+                {% if usr_id == "로그인이 필요합니다" %}
+                    {{ usr_id }}
+                {% else %}
+                    <i style="color:teal" class="fas fa-user-check"></i> {{ usr_id }} 
+                {% endif %}
             </div>
 
         </div>
@@ -78,19 +82,19 @@
     var $bannerImgId = $('#bannerImgId');
 
     $nav_li_notice.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수   
-        $bannerImgId.css('opacity', '0.7').stop().attr("src", "../static/images/notice.png").animate({ opacity: 1 }, 300);
+        $bannerImgId.css('opacity', '0.6').stop().attr("src", "../static/images/notice.png").animate({ opacity: 1 }, 250);
     });
     $nav_li_link.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수         
-        $bannerImgId.css('opacity', '0.7').stop().attr("src", "../static/images/links.png").animate({ opacity: 1 }, 300);
+        $bannerImgId.css('opacity', '0.6').stop().attr("src", "../static/images/links.png").animate({ opacity: 1 }, 250);
     });
     $nav_li_aca.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
-        $bannerImgId.css('opacity', '0.7').stop().attr("src", "../static/images/acainfo.png").animate({ opacity: 1 }, 300);
+        $bannerImgId.css('opacity', '0.6').stop().attr("src", "../static/images/acainfo.png").animate({ opacity: 1 }, 250);
     });
     $nav_li_map.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
-        $bannerImgId.css('opacity', '0.7').stop().attr("src", "../static/images/maps.png").animate({ opacity: 1 }, 300);
+        $bannerImgId.css('opacity', '0.6').stop().attr("src", "../static/images/maps.png").animate({ opacity: 1 }, 250);
     });
     $nav_li_meal.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
-        $bannerImgId.css('opacity', '0.7').stop().attr("src", "../static/images/mealmenu.png").animate({ opacity: 1 }, 300);
+        $bannerImgId.css('opacity', '0.6').stop().attr("src", "../static/images/mealmenu.png").animate({ opacity: 1 }, 250);
     });
 
 

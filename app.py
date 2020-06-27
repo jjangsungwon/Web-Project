@@ -58,11 +58,19 @@ for i in range(len(title_1)):
     print("Link", link_1[i])
 
 ##########################################
+usr_id =''
 
 @app.route('/')
 def index():
-    return render_template(
-        "index.html"
+    if 'user.usr_id' in session:
+        return render_template(
+            "index.html",
+            usr_id = 'user.usr_id'
+        )
+    else:    
+        return render_template(
+            "index.html",
+            usr_id = "로그인이 필요합니다"
         )
 
 # 학업 정보는 로그인 세션이 존재해야만 들어갈 수 있게 한다.
@@ -74,8 +82,6 @@ def acainfos():
 
     else:
         return render_template("login.html")
-
-
 
 @app.route('/mealmenu')
 def mealmenus():
