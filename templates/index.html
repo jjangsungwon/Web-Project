@@ -43,26 +43,31 @@
             cursor: pointer;
         }
 
+        
+        .banner_nav {
+            margin: 0 auto;
+            z-index: 100
+        }
+        
         .banner-nav-container {
             text-align: center;
             font-family: "NanumSquareRoundEB";
-            font-size: 20px;
+            font-size: 17px;
             list-style-type: none;
             display: flex;
             justify-content: center;
             flex-direction: row;
-            margin-left: -2em;
+            padding: 10px;
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
         }
 
         .banner-nav-item {
             width: 270px;
             margin-right: 3px;
             height: 40px;
-            line-height: 2em;
+            line-height: 2.5em;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.17));
             animation: fadein 0.3s;
-            border-radius:7px;
         }
 
         @media (max-width: 991px) {
@@ -74,7 +79,8 @@
                 display: flex;
                 justify-content: center;
                 flex-direction: row;
-                margin-left: -2em;
+                padding: 5px;
+                box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
             }
 
             .banner-nav-item {
@@ -82,7 +88,7 @@
                 margin-top: 1em;
                 margin-right: 2px;
                 height: 30px;
-                line-height: 2em;
+                line-height: 1em;
                 text-align: center;
                 background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.17));
                 animation: fadein 0.3s;
@@ -91,14 +97,14 @@
         }
 
         .banner-nav-item a {
-            color: rgb(37, 37, 37);
+            color: rgb(119, 119, 119);
             text-decoration: none;
             font-weight: 700;
             opacity: 1;
         }
 
         .banner-nav-item a:hover {
-            color: white;
+            color: rgb(27, 73, 172);
             opacity: 1;
             text-decoration: none;
             font-weight: 700;
@@ -106,7 +112,7 @@
         }
 
         .banner-nav-item a:focus {
-            color: white;
+            color: rgb(27, 73, 172);
             opacity: 1;
             text-decoration: none;
             font-weight: 700;
@@ -160,11 +166,6 @@
             padding: 15px;
         }
 
-        .banner_nav {
-            margin: -50px 0 auto;
-            z-index: 100
-        }
-
         .banner_img {
             text-align: center;
             margin-top: 5em;
@@ -202,7 +203,7 @@
         <div class="banner_img">
             <img id="bannerImgId" style="margin-top:15px; max-width: 100%;" src="../static/images/notice.png">
         </div>
-        <!-- 배너 이미지 내부 내비게이션 -->
+        <!-- 배너 이미지 하단 메뉴 내비게이션 -->
         <div class="banner_nav">
             <ul class="banner-nav-container">
                 <li class="banner-nav-item"><a id="nav_li_notice" href="/notice" target="contentFrame"><i
@@ -217,7 +218,7 @@
                 <li class="banner-nav-item"><a id="nav_li_link" href="/sitelink" target="contentFrame"><i
                             class="fas fa-link"></i>
                         사이트 링크</a></li>
-                <li class="banner-nav-item"><a id="nav_li_aca" style="color:rgb(255, 251, 44)" href="/acainfo"
+                <li class="banner-nav-item"><a id="nav_li_aca" style="color:rgb(15, 66, 124)" href="/acainfo"
                         target="contentFrame"><i class="fas fa-info-circle"></i>
                         학업 정보</a>
                 </li>

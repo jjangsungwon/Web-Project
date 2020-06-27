@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, session, redirect, url_for, escape, request, render_template
 ######(추후 삭제) 
 import requests
 from bs4 import BeautifulSoup
@@ -65,9 +65,17 @@ def index():
         "index.html"
         )
 
+# 학업 정보는 로그인 세션이 존재해야만 들어갈 수 있게 한다.
+
 @app.route('/acainfo')
 def acainfos():
-    return render_template("acainfo.html")
+    if 'user.usr_id' in session:
+        return render_template("acainfo.html")
+
+    else:
+        return render_template("login.html")
+
+
 
 @app.route('/mealmenu')
 def mealmenus():
@@ -88,7 +96,9 @@ def notices():
 def schoolmaps():
     return render_template("schoolmap.html")           
 
-
+@app.route('/login')
+def logins():
+    return render_template("login.html")     
 
 
 
