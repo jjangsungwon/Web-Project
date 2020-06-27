@@ -43,12 +43,12 @@
             cursor: pointer;
         }
 
-        
+
         .banner_nav {
             margin: 0 auto;
             z-index: 100
         }
-        
+
         .banner-nav-container {
             text-align: center;
             font-family: "NanumSquareRoundEB";
@@ -69,6 +69,41 @@
             text-align: center;
             animation: fadein 0.3s;
         }
+
+        .banner-nav-item a {
+            color: rgb(119, 119, 119);
+            text-decoration: none;
+            font-weight: 700;
+            opacity: 1;
+        }
+
+        .banner-nav-item a:after {
+            content: '';
+            display: block;
+            width: 50%;
+            border-bottom: 2px solid;
+            margin: 0 auto;
+            opacity: 0;
+            -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+            transition: opacity 0.3s, transform 0.3s;
+            -webkit-transform: scale(0, 1);
+            transform: scale(0, 1);
+        }
+
+        .banner-nav-item a:hover:after {
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .banner-nav-item a:focus {
+            color: rgb(27, 73, 172);
+            opacity: 1;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+
 
         @media (max-width: 991px) {
             .banner-nav-container {
@@ -92,31 +127,29 @@
                 text-align: center;
                 background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.17));
                 animation: fadein 0.3s;
-                border-radius:5px;
+                border-radius: 5px;
+            }
+
+            .banner-nav-item a:after {
+                content: '';
+                display: block;
+                width: 50%;
+                border-bottom: 2px solid;
+                margin-top:0.5em;
+                opacity: 0;
+                -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+                transition: opacity 0.3s, transform 0.3s;
+                -webkit-transform: scale(0, 1);
+                transform: scale(0, 1);
+            }
+
+            .banner-nav-item a:hover:after {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
             }
         }
 
-        .banner-nav-item a {
-            color: rgb(119, 119, 119);
-            text-decoration: none;
-            font-weight: 700;
-            opacity: 1;
-        }
-
-        .banner-nav-item a:hover {
-            color: rgb(27, 73, 172);
-            opacity: 1;
-            text-decoration: none;
-            font-weight: 700;
-            transition : color 0.4s;
-        }
-
-        .banner-nav-item a:focus {
-            color: rgb(27, 73, 172);
-            opacity: 1;
-            text-decoration: none;
-            font-weight: 700;
-        }
 
         .nav-item {
             color: gray;
@@ -125,12 +158,12 @@
         }
 
         a:hover {
-            color: rgb(20, 129, 255);
+            color: rgb(27, 73, 172);
             text-decoration: none;
         }
 
         a:focus {
-            color: rgb(20, 129, 255);
+            color: rgb(27, 73, 172);
             text-decoration: none;
         }
 
@@ -248,19 +281,19 @@
     var $bannerImgId = $('#bannerImgId');
 
     $nav_li_notice.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수   
-        $bannerImgId.css('opacity','0.7').stop().attr("src", "../static/images/notice.png").animate({opacity:1},300);
+        $bannerImgId.css('opacity', '0.7').stop().attr("src", "../static/images/notice.png").animate({ opacity: 1 }, 300);
     });
     $nav_li_link.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수         
-        $bannerImgId.css('opacity','0.7').stop().attr("src", "../static/images/links.png").animate({opacity:1},300);
+        $bannerImgId.css('opacity', '0.7').stop().attr("src", "../static/images/links.png").animate({ opacity: 1 }, 300);
     });
     $nav_li_aca.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
-        $bannerImgId.css('opacity','0.7').stop().attr("src", "../static/images/acainfo.png").animate({opacity:1},300);
+        $bannerImgId.css('opacity', '0.7').stop().attr("src", "../static/images/acainfo.png").animate({ opacity: 1 }, 300);
     });
     $nav_li_map.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
-        $bannerImgId.css('opacity','0.7').stop().attr("src", "../static/images/maps.png").animate({opacity:1},300);
+        $bannerImgId.css('opacity', '0.7').stop().attr("src", "../static/images/maps.png").animate({ opacity: 1 }, 300);
     });
     $nav_li_meal.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
-        $bannerImgId.css('opacity','0.7').stop().attr("src", "../static/images/mealmenu.png").animate({opacity:1},300);
+        $bannerImgId.css('opacity', '0.7').stop().attr("src", "../static/images/mealmenu.png").animate({ opacity: 1 }, 300);
     });
 
 
