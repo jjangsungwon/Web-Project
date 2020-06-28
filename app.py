@@ -6,6 +6,8 @@ from crawling import dbModule
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
+grade = []
+
 ####### 학업 데이터 크롤링 코드 ##########
 LOGIN_URL = 'https://abeek.knu.ac.kr/Keess/comm/support/login/login.action'
 craw_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/list.action'
@@ -34,8 +36,12 @@ def index():
 
 @app.route('/acainfo')
 def acainfos():
+    global grade
     if 'user.usr_id' in session:
-        return render_template("acainfo.html")
+        return render_template(
+            "acainfo.html",
+            grade_array = grade
+            )
 
     else:
         return render_template("login.html")
@@ -97,18 +103,57 @@ def loginProcess():
             login_req = s.post(LOGIN_URL, data=params)
             post_one = s.get(craw_url)
             soup = BeautifulSoup(post_one.text, 'html.parser')
-            data = soup.find_all('tr')  # remove 4번하면 첫 번째 부터 나옴.
-            if len(data) != 0:
-                session['user.usr_id'] = input_usr_id  
 
-                for i in range(4):
-                    data.remove(data[0])
-                grade_array = []
-                for tmp in data:
-                    grade_array.append(tmp.text.split())
-                for i in range(len(grade_array)):
-                    print(grade_array[i])    
-        
+            # 교과목번호
+            num = []
+            for i in soup.select('#tab_FU > table > tr > td:nth-child(1)'):
+                num.append(i.text)
+                # print(i.text)
+
+            # 개설학과
+            department = []
+            for i in soup.select('#tab_FU > table > tr > td:nth-child(2)'):
+                department.append(i.text)
+                # print(i.text)
+            # 교과목명
+            lesson = []
+            for i in soup.select('#tab_FU > table > tr > td:nth-child(3)'):
+                lesson.append(i.text)
+                # print(i.text)
+            # 교과구분
+            division = []
+            for i in soup.select('#tab_FU > table > tr > td:nth-child(4)'):
+                division.append(i.text)
+                # print(i.text)
+            # 학점
+            credit = []
+            for i in soup.select('#tab_FU > table > tr > td:nth-child(5)'):
+                credit.append(i.text)
+                # print(i.text)
+            # 학기
+            semester = []
+            for i in soup.select('#tab_FU > table > tr > td:nth-child(6)'):
+                semester.append(i.text)
+                # print(i.text)
+            # 평점
+            g = []
+            for i in soup.select('#tab_FU > table > tr > td:nth-child(7)'):
+                g.append(i.text)
+                # print(i.text)
+            # 재이수
+            check = []
+            for i in soup.select('#tab_FU > table > tr > td:nth-child(8)'):
+                check.append(i.text)
+                # print(i.text)
+
+            if len(grade) == 0:
+                for i in range(len(num)):
+                    grade.append((num[i], department[i], lesson[i], division[i], credit[i], semester[i], g[i], check[i]))
+                # print(grade[i])
+
+            if len(grade) != 0:
+                session['user.usr_id'] = input_usr_id 
+
     if 'user.usr_id' in session:
         return redirect('/')
     
