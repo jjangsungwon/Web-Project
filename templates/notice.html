@@ -116,6 +116,7 @@
                     <!-- 본관 혹은 학부 공지 컨텐츠 박스 -->
                     <div id="news_content1" class="newsContentSection" style="display:block">
                         <ul>
+<<<<<<< HEAD
                             
                             <a href="">
                             <li>
@@ -123,13 +124,26 @@
                             </li>
                             </a>
                             
+=======
+                            {% for n in news_title %}
+                            <li>
+                                <a href="{{n[1]}}" target="_sub">{{n[0]}}</a>
+                            </li>
+                            {% endfor %}
+>>>>>>> b2d71b2c76e2b220408854d548ae9368b8361f8f
                         </ul>
                     </div>
                     <div id="news_content2" class="newsContentSection" style="display:none">
                         <ul>
+<<<<<<< HEAD
                             
                             <li>
                                 
+=======
+                            {% for n in news_title2 %}
+                            <li>
+                                <a href="{{n[1]}}" target="_sub">{{n[0]}}</a>
+>>>>>>> b2d71b2c76e2b220408854d548ae9368b8361f8f
                             </li>
                             
                         </ul>

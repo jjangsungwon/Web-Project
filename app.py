@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 from flask import Flask, flash, session, redirect, url_for, escape, request, render_template
 from bs4 import BeautifulSoup
 import requests
+=======
+from flask import Flask, session, redirect, url_for, escape, request, render_template
+import requests
+from bs4 import BeautifulSoup
+from crawling import dbModule
+
+>>>>>>> b2d71b2c76e2b220408854d548ae9368b8361f8f
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
+<<<<<<< HEAD
 ####### 학업 데이터 크롤링 코드 ##########
 LOGIN_URL = 'https://abeek.knu.ac.kr/Keess/comm/support/login/login.action'
 craw_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/list.action'
@@ -12,6 +21,8 @@ design_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/designPar
 must_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/essentPart.action'
 
 ##########################################
+=======
+>>>>>>> b2d71b2c76e2b220408854d548ae9368b8361f8f
 usr_id =''
 
 # 각 페이지 라우팅 코드
@@ -30,6 +41,7 @@ def index():
 
 # 학업 정보는 로그인 세션이 존재해야만 들어갈 수 있게 한다.
 
+
 @app.route('/acainfo')
 def acainfos():
     if 'user.usr_id' in session:
@@ -38,24 +50,43 @@ def acainfos():
     else:
         return render_template("login.html")
 
+
 @app.route('/mealmenu')
 def mealmenus():
     return render_template("mealmenu.html")    
+
 
 @app.route('/sitelink')
 def sitelinks():
     return render_template("sitelink.html")        
 
-@app.route('/notice')
+
+@app.route('/notice', methods=['GET'])
 def notices():
+    db_class = dbModule.Database()
+
+    sql = "Select Title, link from testdb.knu_main order by idx LIMIT 10;"
+    row = db_class.executeAll(sql)
+
+    sql2 = "Select Title, link from testdb.department order by idx LIMIT 10;"
+    row2 = db_class.executeAll(sql2)
+
     return render_template(
+<<<<<<< HEAD
         "notice.html"
+=======
+        "notice.html",
+        news_title=[[title['Title'], title['link']] for title in row],
+        news_title2=[[title['Title'], title['link']] for title in row2]
+>>>>>>> b2d71b2c76e2b220408854d548ae9368b8361f8f
         )       
+
 
 @app.route('/schoolmap')
 def schoolmaps():
     return render_template("schoolmap.html")           
 
+<<<<<<< HEAD
 @app.route('/loginProcess', methods=['POST','GET'])
 def loginProcess():
     if request.method == 'POST':
@@ -95,6 +126,12 @@ def loginProcess():
 @app.route('/login')
 def logins():
     return render_template("login.html")   
+=======
+
+@app.route('/login')
+def logins():
+    return render_template("login.html")
+>>>>>>> b2d71b2c76e2b220408854d548ae9368b8361f8f
 
 @app.route('/logout')
 def logouts():
@@ -103,3 +140,4 @@ def logouts():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
