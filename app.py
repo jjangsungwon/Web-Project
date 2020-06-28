@@ -61,16 +61,16 @@ def sitelinks():
 def notices():
     db_class = dbModule.Database()
 
-    sql = "Select Title, link from testdb.knu_main order by idx LIMIT 10;"
+    sql = "Select Title, link from testDB.knu_main order by idx LIMIT 10;"
     row = db_class.executeAll(sql)
 
-    sql2 = "Select Title, link from testdb.department order by idx LIMIT 10;"
+    sql2 = "Select Title, link from testDB.department order by idx LIMIT 10;"
     row2 = db_class.executeAll(sql2)
 
-    sql3 = "Select Title, link from testdb.knu_ud order by idx LIMIT 10;"
+    sql3 = "Select Title, link from testDB.knu_ud order by idx LIMIT 10;"
     row3 = db_class.executeAll(sql3)
 
-    sql4 = "Select Title, link from testdb.Recruitment order by idx LIMIT 10;"
+    sql4 = "Select Title, link from testDB.Recruitment order by idx LIMIT 10;"
     row4 = db_class.executeAll(sql4)
 
     return render_template(
