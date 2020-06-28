@@ -61,16 +61,25 @@ def notices():
     sql2 = "Select Title, link from testdb.department order by idx LIMIT 10;"
     row2 = db_class.executeAll(sql2)
 
+    sql3 = "Select Title, link from testdb.knu_ud order by idx LIMIT 10;"
+    row3 = db_class.executeAll(sql3)
+
+    sql4 = "Select Title, link from testdb.Recruitment order by idx LIMIT 10;"
+    row4 = db_class.executeAll(sql4)
+
     return render_template(
         "notice.html",
-        news_title=[[title['Title'], title['link']] for title in row],
-        news_title2=[[title['Title'], title['link']] for title in row2]
+        knu_main=[[title['Title'], title['link']] for title in row],
+        department=[[title['Title'], title['link']] for title in row2],
+        knu_ud=[[title['Title'], title['link']] for title in row3],
+        Recruitment=[[title['Title'], title['link']] for title in row4]
         )       
 
 
 @app.route('/schoolmap')
 def schoolmaps():
     return render_template("schoolmap.html")           
+
 
 @app.route('/loginProcess', methods=['POST','GET'])
 def loginProcess():
