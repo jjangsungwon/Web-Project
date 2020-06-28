@@ -14,7 +14,7 @@ must_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/essentPart.
 
 params = dict()
 params['user.usr_id'] = 'ID'  # abeek 아이디
-params['user.passwd'] = 'Pwd'  # 비밀번호
+params['user.passwd'] = 'PW'  # 비밀번호
 stu_nbr_code = '학번' #학번
 
 with requests.Session() as session:
@@ -23,37 +23,49 @@ with requests.Session() as session:
     post_one = session.get(craw_url)
     soup = BeautifulSoup(post_one.text, 'html.parser')
 
-    data = soup.find_all('tr')  # remove 4번하면 첫 번째 부터 나옴.
-    for i in range(4):
-        data.remove(data[0])
-    grade_array = []
-    for tmp in data:
-        grade_array.append(tmp.text.split())
+    grade = []
+    # 교과목번호
+    num = []
+    for i in soup.select('#tab_FU > table > tr > td:nth-child(1)'):
+        num.append(i.text)
+        # print(i.text)
 
-    for i in range(len(grade_array)):
-        print(grade_array[i])
+    # 개설학과
+    department = []
+    for i in soup.select('#tab_FU > table > tr > td:nth-child(2)'):
+        department.append(i.text)
+        # print(i.text)
+    # 교과목명
+    lesson = []
+    for i in soup.select('#tab_FU > table > tr > td:nth-child(3)'):
+        lesson.append(i.text)
+        # print(i.text)
+    # 교과구분
+    division = []
+    for i in soup.select('#tab_FU > table > tr > td:nth-child(4)'):
+        division.append(i.text)
+        # print(i.text)
+    # 학점
+    credit = []
+    for i in soup.select('#tab_FU > table > tr > td:nth-child(5)'):
+        credit.append(i.text)
+        # print(i.text)
+    # 학기
+    semester = []
+    for i in soup.select('#tab_FU > table > tr > td:nth-child(6)'):
+        semester.append(i.text)
+        # print(i.text)
+    # 평점
+    g = []
+    for i in soup.select('#tab_FU > table > tr > td:nth-child(7)'):
+        g.append(i.text)
+        # print(i.text)
+    # 재이수
+    check = []
+    for i in soup.select('#tab_FU > table > tr > td:nth-child(8)'):
+        check.append(i.text)
+        # print(i.text)
 
-    # 필수과목 성적조회
-    post_two=session.post(must_url, data={'stu_nbr': stu_nbr_code, 'pgm_cde': 'CE02'})
-    soup_es = BeautifulSoup(post_two.content, 'html.parser')
-    es_data = soup_es.find_all('tr')
-    es_data.remove(es_data[0])
-    must_subject = []
-    for tmp in es_data:
-        must_subject.append(tmp.text.split())
-
-    for i in range(len(must_subject)):
-        print(must_subject[i])
-
-
-    # 설계과목 성적조회
-    post_three=session.post(design_url, data={'stu_nbr': stu_nbr_code, 'pgm_cde': 'CE02'})
-    soup_de = BeautifulSoup(post_three.content, 'html.parser')
-    de_data = soup_de.find_all('tr')
-    de_data.remove(de_data[0])
-    design_subject = []
-    for tmp in de_data:
-        design_subject.append(tmp.text.split())
-
-    for i in range(len(design_subject)):
-        print(design_subject[i])
+    for i in range(len(num)):
+        grade.append((num[i], department[i], lesson[i], division[i], credit[i], semester[i], g[i], check[i]))
+        print(grade[i])
