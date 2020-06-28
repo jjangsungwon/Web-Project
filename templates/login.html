@@ -13,7 +13,7 @@
     <style>
         body {
             font-family: "NanumSquareRoundB";
-            animation:fadein 0.5s;
+            animation: fadein 0.5s;
         }
 
         #main {
@@ -22,12 +22,13 @@
         }
 
         #lg_card {
-            border:1px solid lightgray;
-            border-radius:10px;
+            border: 1px solid lightgray;
+            border-radius: 10px;
             padding: .5em;
             width: 450px;
             margin: 0 auto;
         }
+
         @keyframes fadein {
             from {
                 opacity: 0;
@@ -57,47 +58,30 @@
 
             <!-- input text -->
             <div class="form-group">
-                <label>아이디</label>
-                <input type="text" class="form-control" id="inputID" placeholder="아이디를 입력하세요">
+                <form action="http://127.0.0.1:5000/loginProcess" method="POST">
+                    <label>아이디</label>
+                    <input type="text" class="form-control" name="inputID" placeholder="아이디를 입력하세요">
+                    <br/>
+                    <label>비밀번호</label>
+                    <input type="password" class="form-control" name="inputPW" placeholder="비밀번호를 입력하세요">
+                    <br/>
+                    <p><input type="submit" value="로그인" class="btn btn-primary btn-lg"></p>
+                </form>
             </div>
-            <div class="form-group">
-                <label>비밀번호</label>
-                <input type="password" class="form-control" id="inputPW" placeholder="비밀번호를 입력하세요">
-            </div>
-            <button type="button" onclick="login()" class="btn btn-primary btn-lg"><b>로그인</b></button>
         </div>
 
-        <div id="alertDiv" class="alert alert-dismissible alert-danger" style="margin:0 auto; margin-top:10px; width:450px;">
+        {% if login_error == "error" %}
+        <div id="alertDiv" class="alert alert-dismissible alert-danger"
+            style="margin:0 auto; margin-top:10px; width:450px;">
             <button id="closeButton" type="button" class="close" data-dismiss="alert">&times;</button>
             <strong>오류 - </strong> 아이디 혹은 비밀번호를 다시 확인해 주세요.
         </div>
+        {% endif %}
     </div>
 
 </body>
 
 <script>
-
-    var alertDiv = $('#alertDiv');
-    alertDiv.hide();
-
-    function login() {
-        var id = document.getElementById("inputID").value;
-        var pw = document.getElementById("inputPW").value;
-        var $closeButton = document.getElementById("closeButton");
-
-        if (id == "admin" && pw == "1234") {
-            alert('로그인에 성공하였습니다!');
-            location.href="/";
-        }
-        else if (id == "user" && pw == "1234") {
-            alert('로그인에 성공하였습니다!');
-            location.href="/";
-        }
-        else {
-            alertDiv.fadeIn(200);
-        }
-    }
-
     $(document).ready(function () {
         $('#closeButton').click(function () {
             alertDiv.fadeOut(200);

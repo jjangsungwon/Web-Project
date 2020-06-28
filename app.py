@@ -1,71 +1,26 @@
-from flask import Flask, session, redirect, url_for, escape, request, render_template
-######(추후 삭제) 
-import requests
+from flask import Flask, flash, session, redirect, url_for, escape, request, render_template
 from bs4 import BeautifulSoup
-######(추후 삭제) 
+import requests
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-####### 크롤링 데이터 출력 테스트 (추후 삭제) ########
-
-
-# (1) - 전체 공지사항
-
-req = requests.get("http://knu.ac.kr/wbbs/wbbs/bbs/btin/list.action?bbs_cde=1&menu_idx=67")
-soup = BeautifulSoup(req.text, 'html.parser')
-# 제목
-title_1 = []
-for i in soup.select('div.board_list > table > tbody > tr > td.subject'):
-    title_1.append(i.text.strip())  # 공백 제거
-# 등록일
-date_1 = []
-for i in soup.select('div.board_list > table > tbody > tr > td.date'):
-    date_1.append(i.text.strip())
-# 링크
-link_1 = []
-for i in soup.select('div.board_list > table > tbody > tr > td.subject'):
-    temp = "http://knu.ac.kr/wbbs/wbbs/bbs/btin/viewBtin.action?" + i.find("a")['href']
-    link_1.append(temp)
-
-# (2) - 학사공지
-req = requests.get("http://knu.ac.kr/wbbs/wbbs/bbs/btin/stdList.action?menu_idx=42")
-soup = BeautifulSoup(req.text, 'html.parser')
-# 제목
-title_2 = []
-for i in soup.select('div.board_list > table > tbody > tr > td.subject'):
-    title_2.append(i.text.strip())  # 공백 제거
-# 등록일
-date_2 = []
-for i in soup.select('div.board_list > table > tbody > tr > td.date'):
-    date_2.append(i.text.strip())
-
-# 링크
-# 링크를 javascript:doRead('13997899', '000000', '812', 'row'); 형태로 줘서 앞에 숫자 2개를 이용하기 위해 별도의 과정을 추가함
-link_2 = []
-for i in soup.select('div.board_list > table > tbody > tr > td.subject'):
-    val = i.find("a")['href']
-    val = val[18:]
-    val = val[:-2]
-    val = val.split(' ')
-    no1 = val[0][1:-2]
-    no2 = val[1][1:-2]
-    temp = "http://knu.ac.kr/wbbs/wbbs/bbs/btin/stdViewBtin.action?btin.doc_no=" + val[0][1:-2] + "&btin.appl_no=" + val[1][1:-2] + "&btin.page=1&btin.search_type=&btin.search_text=&popupDeco=&btin.note_div=top&menu_idx=42"
-    link_2.append(temp)
-
-for i in range(len(title_1)):
-    print("Title", title_1[i])
-    print("Date", date_1[i])
-    print("Link", link_1[i])
+####### 학업 데이터 크롤링 코드 ##########
+LOGIN_URL = 'https://abeek.knu.ac.kr/Keess/comm/support/login/login.action'
+craw_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/list.action'
+design_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/designPart.action'
+must_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/essentPart.action'
 
 ##########################################
 usr_id =''
 
+# 각 페이지 라우팅 코드
 @app.route('/')
 def index():
     if 'user.usr_id' in session:
         return render_template(
             "index.html",
-            usr_id = 'user.usr_id'
+            usr_id = session['user.usr_id']
         )
     else:    
         return render_template(
@@ -94,19 +49,57 @@ def sitelinks():
 @app.route('/notice')
 def notices():
     return render_template(
-        "notice.html",
-        news_title=[ title_1[i] for i in range(len(title_1))]
+        "notice.html"
         )       
 
 @app.route('/schoolmap')
 def schoolmaps():
     return render_template("schoolmap.html")           
 
+@app.route('/loginProcess', methods=['POST','GET'])
+def loginProcess():
+    if request.method == 'POST':
+        result = request.form
+        input_usr_id = result['inputID']
+        input_usr_pw = result['inputPW']
+
+        # 인풋받은 ID, PW의 유효성 검증
+        params = dict()
+        params['user.usr_id'] = input_usr_id  # abeek 아이디
+        params['user.passwd'] = input_usr_pw  # 비밀번호
+
+        with requests.Session() as s:
+            login_req = s.post(LOGIN_URL, data=params)
+            post_one = s.get(craw_url)
+            soup = BeautifulSoup(post_one.text, 'html.parser')
+            data = soup.find_all('tr')  # remove 4번하면 첫 번째 부터 나옴.
+            if len(data) != 0:
+                session['user.usr_id'] = input_usr_id  
+
+                for i in range(4):
+                    data.remove(data[0])
+                grade_array = []
+                for tmp in data:
+                    grade_array.append(tmp.text.split())
+                for i in range(len(grade_array)):
+                    print(grade_array[i])    
+        
+    if 'user.usr_id' in session:
+        return redirect('/')
+    
+    return render_template(
+            "login.html",
+            login_error = "error"
+    )   
+
 @app.route('/login')
 def logins():
-    return render_template("login.html")     
+    return render_template("login.html")   
 
-
+@app.route('/logout')
+def logouts():
+    session.pop('user.usr_id', None)
+    return redirect('/')           
 
 if __name__ == '__main__':
     app.run(debug=True)

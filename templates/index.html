@@ -26,8 +26,10 @@
             <div class="login_section">
                 {% if usr_id == "로그인이 필요합니다" %}
                     {{ usr_id }}
+                    <button onClick="location.href='/login'" class="btn btn-primary btn-sm btn-success"><i class="fas fa-power-off"></i></button>
                 {% else %}
-                    <i style="color:teal" class="fas fa-user-check"></i> {{ usr_id }} 
+                    <i style="color:teal" class="fas fa-user-check"></i> {{ usr_id }} 님
+                    <button onClick="location.href='/logout'" class="btn btn-primary btn-sm btn-danger"><i class="fas fa-power-off"></i></button>
                 {% endif %}
             </div>
 
@@ -52,10 +54,18 @@
                 <li class="banner-nav-item"><a id="nav_li_link" href="/sitelink" target="contentFrame"><i
                             class="fas fa-link"></i>
                         사이트 링크</a></li>
-                <li class="banner-nav-item"><a id="nav_li_aca" style="color:rgb(15, 66, 124)" href="/acainfo"
-                        target="contentFrame"><i class="fas fa-info-circle"></i>
-                        학업 정보</a>
+
+                {% if usr_id == "로그인이 필요합니다" %}        
+                <li class="banner-nav-item"><a id="none_aca" style="color:rgb(15, 66, 124)">
+                    <i class="fas fa-info-circle"></i>
+                        학업정보</a>
                 </li>
+                {% else %}
+                <li class="banner-nav-item"><a id="nav_li_aca" style="color:rgb(15, 66, 124)" href="/acainfo"
+                    target="contentFrame"><i class="fas fa-info-circle"></i>
+                        학업정보</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
 
@@ -80,6 +90,11 @@
     var $nav_li_notice = $('#nav_li_notice');
 
     var $bannerImgId = $('#bannerImgId');
+    var $none_aca = $('#none_aca');
+
+    $none_aca.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수   
+        alert('로그인이 필요한 기능입니다.')
+    });
 
     $nav_li_notice.click(function () { // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수   
         $bannerImgId.css('opacity', '0.6').stop().attr("src", "../static/images/notice.png").animate({ opacity: 1 }, 250);
