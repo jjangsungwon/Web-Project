@@ -7,12 +7,23 @@ app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 grade = []
+design_count, required_count = 0, 0
+final_grade=[]
 
 ####### 학업 데이터 크롤링 코드 ##########
 LOGIN_URL = 'https://abeek.knu.ac.kr/Keess/comm/support/login/login.action'
 craw_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/list.action'
 design_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/designPart.action'
 must_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/essentPart.action'
+
+# 설계과목
+design = {'COMP205': 2, 'COMP217': 2, 'ELEC462': 2, 'COMP224': 2, 'COMP225': 2, 'COMP422': 2, 'ITEC401': 4,
+          'ITEC402': 4}
+
+# 필수과목
+required = {'CLTR211': 3, 'CLTR213': 3, 'CLTR223': 3, 'COME301': 3, 'COMP204': 3, 'COMP205': 3, 'COME331': 3,
+            'COMP217': 3, 'COMP411': 3, 'ELEC462': 3, 'COMP208': 3, 'COMP206': 3,
+            'COMP312': 3, 'COMP319': 3, 'ITEC401': 4, 'ITEC402': 4}
 
 ##########################################
 usr_id =''
@@ -37,10 +48,15 @@ def index():
 @app.route('/acainfo')
 def acainfos():
     global grade
+    global final_grade
+    global design_count, required_count
     if 'user.usr_id' in session:
         return render_template(
             "acainfo.html",
-            grade_array = grade
+            grade_array = grade,
+            final_grade = final_grade,
+            design_count = design_count,
+            required_count = required_count
             )
 
     else:
@@ -99,10 +115,15 @@ def loginProcess():
         params['user.usr_id'] = input_usr_id  # abeek 아이디
         params['user.passwd'] = input_usr_pw  # 비밀번호
 
+        global design_count, required_count
+
         with requests.Session() as s:
             login_req = s.post(LOGIN_URL, data=params)
             post_one = s.get(craw_url)
             soup = BeautifulSoup(post_one.text, 'html.parser')
+
+            for i in soup.select('div.contents > div.contents_box > div.contents_body > div.info_table.mb_30 > table > tr > td'):
+                final_grade.append(i.text)
 
             # 교과목번호
             num = []
@@ -149,9 +170,14 @@ def loginProcess():
             if len(grade) == 0:
                 for i in range(len(num)):
                     grade.append((num[i], department[i], lesson[i], division[i], credit[i], semester[i], g[i], check[i]))
-                # print(grade[i])
+                    if num[i] in design.keys():
+                        design_count += design[num[i]]
+                    if num[i] in required.keys():
+                        required_count += required[num[i]]
+            print(design_count, required_count)
+            print(final_grade)        
 
-            if len(grade) != 0:
+            if len(grade) != 0 and design_count != 0 and required_count != 0:
                 session['user.usr_id'] = input_usr_id 
 
     if 'user.usr_id' in session:

@@ -91,7 +91,27 @@
 
         <!-- 졸업 요건 충족 확인 박스 -->
         <div id="info2" class="infoSection" style="float:right">
-
+            <p style="text-align:center; font-size :23px;
+            border-radius:8px; padding:5px;
+            color:white;
+            background-color: rgb(27, 95, 151);">
+                졸업요건 충족확인</p>
+                <table class="table table-hover">
+                    <thead>
+                        <th style="font-size:30px; text-align:center" width="50%">이수학점</th>
+                        <th style="font-size:30px; text-align:center" width="50%">평점</th>
+                    </thead>
+                    <tbody>
+                        <tr style="font-size:20px; text-align:center">
+                            <td>
+                                <span style="color:teal">{{final_grade[0]}}</span> / 150
+                            </td>
+                            <td>
+                                {{final_grade[1]}} {{required_count}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
         </div>
     </div>
 
