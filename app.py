@@ -13,13 +13,16 @@ design_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/designPar
 must_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/essentPart.action'
 
 # 설계과목
-design = {'COMP205': 2, 'COMP217': 2, 'ELEC462': 2, 'COMP224': 2, 'COMP225': 2, 'COMP422': 2, 'ITEC401': 4,
-          'ITEC402': 4}
+design = {'COMP205': [2, '기초창의공학설계'], 'COMP217': [2, '자바프로그래밍'], 'ELEC462': [2, '시스템프로그래밍'],
+          'COMP224': [2, '소프트웨어설계'], 'COMP225': [2, '디지털설계및실험'], 'COMP422': [2, '소프트웨어공학'],
+          'ITEC401': [4, '종합설계프로젝트1'], 'ITEC402': [4, '종합설계프로젝트2']}
 
 # 필수과목
-required = {'CLTR211': 3, 'CLTR213': 3, 'CLTR223': 3, 'COME301': 3, 'COMP204': 3, 'COMP205': 3, 'COME331': 3,
-            'COMP217': 3, 'COMP411': 3, 'ELEC462': 3, 'COMP208': 3, 'COMP206': 3,
-            'COMP312': 3, 'COMP319': 3, 'ITEC401': 4, 'ITEC402': 4}
+required = {'CLTR211': [3, '공학수학1'], 'CLTR213': [3, '물리학1'], 'CLTR223': [3, '물리학실험'], 'COME301': [3, '이산수학'],
+            'COMP204': [3, '프로그래밍기초'], 'COMP205': [3, '대학글쓰기'], 'COME331': [3, '자료구조'], 'COMP217': [3, '자바프로그래밍'],
+            'COMP411': [3, '컴퓨터구조'], 'ELEC462': [3, '시스템프로그래밍'], 'COMP208': [3, '물리학실험'],
+            'COMP206': [3, '프로그래밍기초'], 'COMP312': [3, '운영체제'], 'COMP319': [3, '알고리즘1'],
+            'ITEC401': [4, '종합설계프로젝트1'], 'ITEC402': [4, '종합설계프로젝트2']}
 
 ##########################################
 usr_id =''
@@ -111,7 +114,7 @@ def loginProcess():
         final_grade = []
         grade = []
         required_count, design_count = 0, 0
-
+        required_check, design_check = [], []  # 들은 필수 과목, 설계 과목 리스트
         with requests.Session() as s:
             login_req = s.post(LOGIN_URL, data=params)
             post_one = s.get(craw_url)
@@ -169,12 +172,24 @@ def loginProcess():
                 for i in range(len(num)):
                     grade.append((num[i], department[i], lesson[i], division[i], credit[i], semester[i], g[i], check[i]))
                     if num[i] in design.keys():
-                        design_count += design[num[i]]
+                        design_count += design[num[i]][0]
+                        design_check.append(design[num[i]][1])
                     if num[i] in required.keys():
-                        required_count += required[num[i]]
+                        required_count += required[num[i]][0]
+                        required_check.append(required[num[i]][1])
             print(design_count, required_count)
             print(final_grade)
 
+            no_design, no_required = [], []
+            for key in design.keys():
+                if design[key][1] not in design_check:
+                    no_design.append(design[key][1])
+            for key in required.keys():
+                if required[key][1] not in required_check:
+                    no_required.append(required[key][1])
+
+            print(no_design)
+            print(no_required)
             #세션에 저장
             session['design_count'] = design_count        
             session['required_count'] = required_count
