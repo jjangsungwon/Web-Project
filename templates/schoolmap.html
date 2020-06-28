@@ -72,6 +72,27 @@ var mapOptions = {
 };
 
 var map = new naver.maps.Map('map', mapOptions);
+
+// marker
+var marker1 = new naver.maps.Marker({
+  position: new naver.maps.LatLng(35.888047, 128.611633), // 융복합관
+  map: map,
+  text: "test",
+  icon: {
+    url: '/marker.png',
+  }
+})
+marker1.setTitle("융복합관");
+
+var marker2 = new naver.maps.Marker({
+  position: new naver.maps.LatLng(35.891722, 128.612005), // 중앙도서관
+  map: map,
+  icon: {
+    url: '/marker.png',
+  }
+})
+marker2.setTitle("중앙도서관");
+
 </script>
 </body>
 </html>
