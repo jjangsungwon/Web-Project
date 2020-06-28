@@ -6,10 +6,10 @@ import pymysql
 
 class Database():
     def __init__(self):
-        self.db = pymysql.connect(host='localhost',
-                                  user='root',
-                                  password='163695',
-                                  db='testdb',
+        self.db = pymysql.connect(host='107.21.40.27',
+                                  user='{KJY}',
+                                  password='{KJY}',
+                                  db='testDB',
                                   charset='utf8')
         self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
 
