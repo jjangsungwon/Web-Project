@@ -116,7 +116,7 @@
                     <!-- 본관 혹은 학부 공지 컨텐츠 박스 -->
                     <div id="news_content1" class="newsContentSection" style="display:block">
                         <ul>
-                            {% for n in news_title %}
+                            {% for n in knu_main %}
                             <li>
                                 <a href="{{n[1]}}" target="_sub">{{n[0]}}</a>
                             </li>
@@ -125,7 +125,7 @@
                     </div>
                     <div id="news_content2" class="newsContentSection" style="display:none">
                         <ul>
-                            {% for n in news_title2 %}
+                            {% for n in knu_ud %}
                             <li>
                                 <a href="{{n[1]}}" target="_sub">{{n[0]}}</a>
                             </li>
@@ -155,16 +155,20 @@
                     <!-- 학부 공지 및 채용정보 컨텐츠 박스 -->
                     <div id="news_content3" class="newsContentSection" style="display:block">
                         <ul>
+                            {% for n in department %}
                             <li>
-                                <a></a>
+                                <a href="{{n[1]}}" target="_sub">{{n[0]}}</a>
                             </li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div id="news_content4" class="newsContentSection" style="display:none">
                         <ul>
+                            {% for n in Recruitment %}
                             <li>
-                                <a></a>
+                                <a href="{{n[1]}}" target="_sub">{{n[0]}}</a>
                             </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
