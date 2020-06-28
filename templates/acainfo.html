@@ -27,18 +27,19 @@
         .infoSection {
             width: 49%;
             max-width: 800px;
-            height:700px;
+            height: 800px;
             border: 1px solid lightgray;
+            border-radius: 8px;
             padding: 10px;
         }
 
-        @media (max-width: 800px){
+        @media (max-width: 800px) {
             .infoSection {
-            float: left;
-            width: 100%;
-            border: 1px solid lightgray;
-            padding: 10px;
-        }
+                float: left;
+                width: 100%;
+                border: 1px solid lightgray;
+                padding: 10px;
+            }
         }
 
         @keyframes fadein {
@@ -54,18 +55,45 @@
 </head>
 
 <body>
-        <div id="content" style="max-width:1400px; margin:0 auto;">
-            <!-- 페이지 배너 -->
-            <!-- 전체 학점 및 과목 정보 박스 -->
-            <div id="info1" class="infoSection" style="float:left">
-                
-            </div>
+    <div id="content" style="max-width:1400px; margin:0 auto;">
+        <!-- 페이지 배너 -->
+        <!-- 전체 학점 및 과목 정보 박스 -->
+        <div id="info1" class="infoSection" style="overflow:scroll; float:left">
 
-            <!-- 졸업 요건 충족 확인 박스 -->
-            <div id="info2" class="infoSection" style="float:right">
-                
-            </div>
+            <p style="text-align:center; font-size :23px;
+            border-radius:8px; padding:5px;
+            color:white;
+            background-color: rgb(28, 129, 211);">
+                내가 수강한 과목들</p>
+            <table class="table table-hover">
+                <thead>
+                    <th style="color:teal; text-align:center" width="14%">과목번호</th>
+                    <th style="text-align:center" width="20%">개설학과</th>
+                    <th style="text-align:center" width="20%">교과목명</th>
+                    <th style="text-align:center" width="14%">교과구분</th>
+                    <th style="text-align:center" width="9%">학점</th>
+                    <th style="text-align:center" width="14%">학기</th>
+                    <th style="text-align:center" width="9%">평점</th>
+                </thead>
+                <tbody>
+                    {% for tr in grade_array %}
+                    <tr>
+                        {% for td in tr %}
+                        <td style="text-align:center">
+                            {{td}}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+
+        <!-- 졸업 요건 충족 확인 박스 -->
+        <div id="info2" class="infoSection" style="float:right">
+
+        </div>
+    </div>
 
 </body>
 
