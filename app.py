@@ -53,6 +53,8 @@ def acainfos():
             final_grade = session['final_grade'],
             design_count = session['design_count'],
             required_count = session['required_count'],
+            no_required = session['no_required'],
+            no_design = session['no_design']
             )
 
     else:
@@ -115,6 +117,7 @@ def loginProcess():
         grade = []
         required_count, design_count = 0, 0
         required_check, design_check = [], []  # 들은 필수 과목, 설계 과목 리스트
+        no_design, no_required = [], []
         with requests.Session() as s:
             login_req = s.post(LOGIN_URL, data=params)
             post_one = s.get(craw_url)
@@ -180,7 +183,6 @@ def loginProcess():
             print(design_count, required_count)
             print(final_grade)
 
-            no_design, no_required = [], []
             for key in design.keys():
                 if design[key][1] not in design_check:
                     no_design.append(design[key][1])
@@ -193,7 +195,9 @@ def loginProcess():
             #세션에 저장
             session['design_count'] = design_count        
             session['required_count'] = required_count
-            session['grade'] = grade          
+            session['grade'] = grade
+            session['no_required'] = no_required
+            session['no_design'] = no_design              
 
             if len(grade) != 0 and design_count != 0 and required_count != 0:
                 session['user.usr_id'] = input_usr_id 
@@ -217,6 +221,8 @@ def logouts():
     session.pop('grade', None)
     session.pop('design_count', None)
     session.pop('final_grade', None)
+    session.pop('no_required', None)
+    session.pop('no_design', None)
 
     return redirect('/')           
 
