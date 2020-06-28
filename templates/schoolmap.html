@@ -63,7 +63,7 @@
 <script>
 var mapOptions = {
     center: new naver.maps.LatLng(35.889014, 128.610246),
-    zoom: 13, //지도의 초기 줌 레벨
+    zoom: 16, //지도의 초기 줌 레벨
         minZoom: 7, //지도의 최소 줌 레벨
         zoomControl: true, //줌 컨트롤의 표시 여부
         zoomControlOptions: { //줌 컨트롤의 옵션
@@ -72,27 +72,76 @@ var mapOptions = {
 };
 
 var map = new naver.maps.Map('map', mapOptions);
+var infoWindows = [];
+var markers = [];
 
 // marker
+var marker = []
+var information = []
+
 var marker1 = new naver.maps.Marker({
-  position: new naver.maps.LatLng(35.888047, 128.611633), // 융복합관
+  position: new naver.maps.LatLng(35.886935, 128.608488), // 9호관
+  map: map,
+  title: "test",
+  icon: {
+    url: './marker.png',
+  }
+})
+var marker2 = new naver.maps.Marker({
+  position: new naver.maps.LatLng(35.888147, 128.611533), // 융복합관
   map: map,
   text: "test",
   icon: {
-    url: '../image/marker.png',
+    url: './marker.png',
   }
 })
-marker1.setTitle("융복합관");
 
-var marker2 = new naver.maps.Marker({
+var marker3 = new naver.maps.Marker({
   position: new naver.maps.LatLng(35.891722, 128.612005), // 중앙도서관
   map: map,
   icon: {
-    url: '../image/marker.png',
+    url: './marker.png',
   }
 })
-marker2.setTitle("중앙도서관");
 
+// information
+var information1 = new naver.maps.InfoWindow({
+  content: '공대9호관',
+});
+var information2 = new naver.maps.InfoWindow({
+  content: '공대5호관(IT융복합관)',
+});
+var information3 = new naver.maps.InfoWindow({
+  content: '중앙도서관',
+});
+marker.push(marker1);
+marker.push(marker2);
+marker.push(marker3);
+information.push(information1);
+information.push(information2);
+information.push(information3);
+
+naver.maps.Event.addListener(marker[0], "click", function (e){
+  if(information[0].getMap()){
+    information[0].close();
+  } else{
+    information[0].open(map, marker[0]);
+  }
+});
+naver.maps.Event.addListener(marker[1], "click", function (e){
+  if(information[1].getMap()){
+    information[1].close();
+  } else{
+    information[1].open(map, marker[1]);
+  }
+});
+naver.maps.Event.addListener(marker[2], "click", function (e){
+  if(information[2].getMap()){
+    information[2].close();
+  } else{
+    information[2].open(map, marker[2]);
+  }
+});
 </script>
 </body>
 </html>
