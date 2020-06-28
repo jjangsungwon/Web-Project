@@ -7,6 +7,9 @@
 <head>
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
     <link href="../static/css/font.css" rel="stylesheet">
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
     <title>KNU CSE PUZZLE</title>
 
     <style>
@@ -26,11 +29,20 @@
 
         .infoSection {
             width: 49%;
-            max-width: 800px;
+            max-width: 900px;
             height: 800px;
             border: 1px solid lightgray;
             border-radius: 8px;
             padding: 10px;
+        }
+
+        #chartdiv {
+            width: 100%;
+            height: 500px;
+        }
+        #chartdiv2 {
+            width: 100%;
+            height: 500px;
         }
 
         @media (max-width: 800px) {
@@ -90,31 +102,263 @@
         </div>
 
         <!-- 졸업 요건 충족 확인 박스 -->
-        <div id="info2" class="infoSection" style="float:right">
+        <div id="info2" class="infoSection" style="overflow:scroll; float:right">
             <p style="text-align:center; font-size :23px;
             border-radius:8px; padding:5px;
             color:white;
             background-color: rgb(27, 95, 151);">
                 졸업요건 충족확인</p>
-                <table class="table table-hover">
-                    <thead>
-                        <th style="font-size:30px; text-align:center" width="50%">이수학점</th>
-                        <th style="font-size:30px; text-align:center" width="50%">평점</th>
-                    </thead>
-                    <tbody>
-                        <tr style="font-size:20px; text-align:center">
-                            <td>
-                                <span style="color:teal">{{final_grade[0]}}</span> / 150
-                            </td>
-                            <td>
-                                {{final_grade[1]}} {{required_count}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+            <!-- 이수학점 및 평점 메인 -->
+            <table class="table table-hover">
+                <thead>
+                    <th style="font-size:30px; text-align:center" width="50%">이수학점</th>
+                    <th style="font-size:30px; text-align:center" width="50%">평점</th>
+                </thead>
+                <tbody>
+                    <tr style="font-size:20px; text-align:center">
+                        <td>
+                            <span style="color:teal">{{final_grade[0]}}</span> / 150
+                        </td>
+                        <td>
+                            {{final_grade[1]}} / 4.3
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 그래프로 시각화할 자료 -->
+            <!-- Abeek 112학점 중 기본소양, 전공기반, 공학전공 학점 -->
+            <p style="text-align:center; font-size :18px;
+            border-radius:7px; padding:5px;
+            color:white;
+            background-color: rgb(161, 100, 130);">
+                ABEEK (기본소양, 전공기반, 공학전공) </p>
+            <div id="chartdiv"></div>
+
+            <!-- Abeek 112학점 중 기본소양, 전공기반, 공학전공 학점 -->
+            <p style="text-align:center; font-size :18px;
+            border-radius:7px; padding:5px;
+            color:white;
+            background-color: rgb(107, 92, 143);">
+                ABEEK 필수과목 수강여부 </p>
+            <div id="chartdiv2"></div>
+
         </div>
+    </div>
     </div>
 
 </body>
+
+<script>
+    am4core.ready(function() {
+    
+    // Themes begin
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+  
+    var chart = am4core.create('chartdiv', am4charts.XYChart)
+
+    chart.colors.step = 2;
+    
+    chart.legend = new am4charts.Legend()
+    chart.legend.position = 'top'
+    chart.legend.paddingBottom = 20
+    chart.legend.labels.template.maxWidth = 95
+    
+    var xAxis = chart.xAxes.push(new am4charts.CategoryAxis())
+    xAxis.dataFields.category = 'category'
+    xAxis.renderer.cellStartLocation = 0.1
+    xAxis.renderer.cellEndLocation = 0.9
+    xAxis.renderer.grid.template.location = 0;
+    
+    var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    yAxis.min = 0;
+    
+    function createSeries(value, name) {
+        var series = chart.series.push(new am4charts.ColumnSeries())
+        series.dataFields.valueY = value
+        series.dataFields.categoryX = 'category'
+        series.name = name
+    
+        series.events.on("hidden", arrangeColumns);
+        series.events.on("shown", arrangeColumns);
+    
+        var bullet = series.bullets.push(new am4charts.LabelBullet())
+        bullet.interactionsEnabled = false
+        bullet.dy = 30;
+        bullet.label.text = '{valueY}'
+        bullet.label.fill = am4core.color('#ffffff')
+    
+        return series;
+    }
+
+    chart.data = [
+        {
+            category: '기본소양',
+            first: {{final_grade[4]}},
+            second: 15,
+        },
+        {
+            category: '전공기반',
+            first: {{final_grade[5]}},
+            second: 22,
+        },
+        {
+            category: '공학전공',
+            first: {{final_grade[6]}},
+            second: 75,
+        },
+        {
+            category: '합계',
+            first: {{final_grade[4]}} + {{final_grade[5]}} + {{final_grade[6]}},
+            second: 112,
+        }
+    ]
+    
+    
+    createSeries('first', '현재학점');
+    createSeries('second', '필요학점');
+    
+    function arrangeColumns() {
+    
+        var series = chart.series.getIndex(0);
+    
+        var w = 1 - xAxis.renderer.cellStartLocation - (1 - xAxis.renderer.cellEndLocation);
+        if (series.dataItems.length > 1) {
+            var x0 = xAxis.getX(series.dataItems.getIndex(0), "categoryX");
+            var x1 = xAxis.getX(series.dataItems.getIndex(1), "categoryX");
+            var delta = ((x1 - x0) / chart.series.length) * w;
+            if (am4core.isNumber(delta)) {
+                var middle = chart.series.length / 2;
+    
+                var newIndex = 0;
+                chart.series.each(function(series) {
+                    if (!series.isHidden && !series.isHiding) {
+                        series.dummyData = newIndex;
+                        newIndex++;
+                    }
+                    else {
+                        series.dummyData = chart.series.indexOf(series);
+                    }
+                })
+                var visibleCount = newIndex;
+                var newMiddle = visibleCount / 2;
+    
+                chart.series.each(function(series) {
+                    var trueIndex = chart.series.indexOf(series);
+                    var newIndex = series.dummyData;
+    
+                    var dx = (newIndex - trueIndex + middle - newMiddle) * delta
+    
+                    series.animate({ property: "dx", to: dx }, series.interpolationDuration, series.interpolationEasing);
+                    series.bulletsContainer.animate({ property: "dx", to: dx }, series.interpolationDuration, series.interpolationEasing);
+                })
+            }
+        }
+    }
+    }); // end am4core.ready()
+</script>
+
+<script>
+    am4core.ready(function() {
+    
+    // Themes begin
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+  
+    var chart = am4core.create('chartdiv2', am4charts.XYChart)
+
+    chart.colors.step = 2;
+    
+    chart.legend = new am4charts.Legend()
+    chart.legend.position = 'top'
+    chart.legend.paddingBottom = 20
+    chart.legend.labels.template.maxWidth = 95
+    
+    var xAxis = chart.xAxes.push(new am4charts.CategoryAxis())
+    xAxis.dataFields.category = 'category'
+    xAxis.renderer.cellStartLocation = 0.1
+    xAxis.renderer.cellEndLocation = 0.9
+    xAxis.renderer.grid.template.location = 0;
+    
+    var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    yAxis.min = 0;
+    
+    function createSeries(value, name) {
+        var series = chart.series.push(new am4charts.ColumnSeries())
+        series.dataFields.valueY = value
+        series.dataFields.categoryX = 'category'
+        series.name = name
+    
+        series.events.on("hidden", arrangeColumns);
+        series.events.on("shown", arrangeColumns);
+    
+        var bullet = series.bullets.push(new am4charts.LabelBullet())
+        bullet.interactionsEnabled = false
+        bullet.dy = 30;
+        bullet.label.text = '{valueY}'
+        bullet.label.fill = am4core.color('#ffffff')
+    
+        return series;
+    }
+
+    chart.data = [
+        {
+            category: '설계과목',
+            first: {{design_count}},
+            second: 16,
+        },
+        {
+            category: '필수 공학전공',
+            first: {{required_count}},
+            second: 44,
+        },
+    ]
+    
+    
+    createSeries('first', '현재학점');
+    createSeries('second', '필요학점');
+    
+    function arrangeColumns() {
+    
+        var series = chart.series.getIndex(0);
+    
+        var w = 1 - xAxis.renderer.cellStartLocation - (1 - xAxis.renderer.cellEndLocation);
+        if (series.dataItems.length > 1) {
+            var x0 = xAxis.getX(series.dataItems.getIndex(0), "categoryX");
+            var x1 = xAxis.getX(series.dataItems.getIndex(1), "categoryX");
+            var delta = ((x1 - x0) / chart.series.length) * w;
+            if (am4core.isNumber(delta)) {
+                var middle = chart.series.length / 2;
+    
+                var newIndex = 0;
+                chart.series.each(function(series) {
+                    if (!series.isHidden && !series.isHiding) {
+                        series.dummyData = newIndex;
+                        newIndex++;
+                    }
+                    else {
+                        series.dummyData = chart.series.indexOf(series);
+                    }
+                })
+                var visibleCount = newIndex;
+                var newMiddle = visibleCount / 2;
+    
+                chart.series.each(function(series) {
+                    var trueIndex = chart.series.indexOf(series);
+                    var newIndex = series.dummyData;
+    
+                    var dx = (newIndex - trueIndex + middle - newMiddle) * delta
+    
+                    series.animate({ property: "dx", to: dx }, series.interpolationDuration, series.interpolationEasing);
+                    series.bulletsContainer.animate({ property: "dx", to: dx }, series.interpolationDuration, series.interpolationEasing);
+                })
+            }
+        }
+    }
+    }); // end am4core.ready()
+</script>
+
 
 </html>

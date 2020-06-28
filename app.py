@@ -194,7 +194,15 @@ def logins():
 
 @app.route('/logout')
 def logouts():
+    global grade
+    global final_grade
+    global design_count, required_count
+
     session.pop('user.usr_id', None)
+    grade=[]
+    final_grade=[]
+    design_count, required_count = 0, 0
+
     return redirect('/')           
 
 if __name__ == '__main__':
