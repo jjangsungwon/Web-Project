@@ -7,7 +7,11 @@
 <head>
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
     <link href="../static/css/font.css" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
     <title>KNU CSE PUZZLE</title>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=0fqa69fzdm"></script>
 
     <style>
         body,
@@ -49,13 +53,25 @@
     <div id="content" style="max-width:1400px; margin:0 auto;">
         <!-- 페이지 배너 -->
         <!-- 지도가 보일 박스 컨테이너 -->
-        <div id="main_map" class="mapSection" style="margin-right:10px;">
+        <div id="map" class="mapSection" style="margin-right:10px;">
 
         </div>
 
 
     </div>
 
-</body>
+<script>
+var mapOptions = {
+    center: new naver.maps.LatLng(35.889014, 128.610246),
+    zoom: 13, //지도의 초기 줌 레벨
+        minZoom: 7, //지도의 최소 줌 레벨
+        zoomControl: true, //줌 컨트롤의 표시 여부
+        zoomControlOptions: { //줌 컨트롤의 옵션
+            position: naver.maps.Position.TOP_RIGHT
+        }
+};
 
+var map = new naver.maps.Map('map', mapOptions);
+</script>
+</body>
 </html>
