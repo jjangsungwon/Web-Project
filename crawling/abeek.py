@@ -15,7 +15,7 @@ design = {'COMP205': 2, 'COMP217': 2, 'ELEC462': 2, 'COMP224': 2, 'COMP225': 2, 
 
 # 필수과목
 required = {'CLTR211': 3, 'CLTR213': 3, 'CLTR223': 3, 'COME301': 3, 'COMP204': 3, 'COMP205': 3, 'COME331': 3,
-            'COMP217': 3, 'COMP411': 3, 'ELEC462': 3,
+            'COMP217': 3, 'COMP411': 3, 'ELEC462': 3, 'COMP206': 3, 'COMP208': 3,
             'COMP312': 3, 'COMP319': 3, 'ITEC401': 4, 'ITEC402': 4}
 
 design_count, required_count = 0, 0
