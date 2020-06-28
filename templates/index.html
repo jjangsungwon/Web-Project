@@ -20,16 +20,16 @@
         <!-- 상단 고정 내비게이션 부분 -->
         <div class="nav-main">
             <!-- 상단 로고 부분 : 좌측에 배치 -->
-            <div style="text-align:center">
+            <div id="top_logo">
                 <a href="/"><img id="logoImg" src="../static/images/logo.png" width="190" height="51"></a>
             </div>
             <div class="login_section">
                 {% if usr_id == "로그인이 필요합니다" %}
-                    {{ usr_id }}
-                    <button onClick="location.href='/login'" class="btn btn-primary btn-sm btn-success"><i class="fas fa-power-off"></i></button>
+                    <span style="color:rgb(12, 100, 85); font-size: 17px; font-weight:800">로그인</span>
+                    <button onClick="location.href='/login'" class="btn btn-primary btn-success"><i class="fas fa-power-off"></i></button>
                 {% else %}
                     <i style="color:teal" class="fas fa-user-check"></i> {{ usr_id }} 님
-                    <button onClick="location.href='/logout'" class="btn btn-primary btn-sm btn-danger"><i class="fas fa-power-off"></i></button>
+                    <button onClick="location.href='/logout'" class="btn btn-primary btn-danger"><i class="fas fa-power-off"></i></button>
                 {% endif %}
             </div>
 
@@ -53,7 +53,7 @@
                         교내 지도</a></li>
                 <li class="banner-nav-item"><a id="nav_li_link" href="/sitelink" target="contentFrame"><i
                             class="fas fa-link"></i>
-                        사이트 링크</a></li>
+                        링크 모음</a></li>
 
                 {% if usr_id == "로그인이 필요합니다" %}        
                 <li class="banner-nav-item"><a id="none_aca" style="color:rgb(15, 66, 124)">

@@ -90,9 +90,15 @@ body,
             font-weight: 700;
         }
 
-
+        #top_logo{
+            text-align:center;
+        }
 
         @media (max-width: 991px) {
+            #top_logo{
+                text-align:left;
+            }
+
             .banner-nav-container {
                 text-align: center;
                 font-family: "NanumSquareRoundEB";
@@ -106,6 +112,7 @@ body,
             }
 
             .banner-nav-item {
+                font-size:14px;
                 width: 270px;
                 margin-top: 1em;
                 margin-right: 2px;
@@ -164,6 +171,7 @@ body,
             top: 0;
             right: 0;
             margin-top: 1.8em;
+            margin-right:0.5em;
             padding: 5px;
             background-color: white;
         }
