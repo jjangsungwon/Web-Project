@@ -43,3 +43,8 @@ for tmp in soup.select('#print > div:nth-child(2) > table > tbody > tr > td > ul
 for tmp in soup.select('#print > div:nth-child(3) > table > tbody > tr > td > ul > li > p'):
     diet_85_dinner.append(tmp.text)
 
+print(diet_36)
+print(diet_37)
+print(diet_85_dinner)
+print(diet_85_lunch)
+

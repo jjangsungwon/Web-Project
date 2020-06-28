@@ -12,14 +12,21 @@ import requests
 from bs4 import BeautifulSoup
 import dbModule
 
-
+'''
 def insert(table_name, idx, title, data, link):
     db_class = dbModule.Database()
 
     sql = 'INSERT INTO %s VALUES(%d, "%s", "%s", "%s")' % (table_name, idx, title, data, link)
     db_class.execute(sql)
     db_class.commit()
+'''
 
+def insert_notice(table_name, idx, title, data, link):
+    db_class = dbModule.Database()
+
+    sql = 'INSERT INTO %s VALUES(%d, "%s", "%s", "%s")' % (table_name, idx, title, data, link)
+    db_class.execute(sql)
+    db_class.commit()
 
 req = requests.get("http://knu.ac.kr/wbbs/wbbs/bbs/btin/list.action?bbs_cde=1&menu_idx=67")
 soup = BeautifulSoup(req.text, 'html.parser')
@@ -69,11 +76,11 @@ for i in range(len(title_1)):
     print("Title", title_1[i])
     print("Date", date_1[i])
     print("Link", link_1[i])
-    insert("knu_main", i + 1, title_1[i], date_1[i], link_1[i])
+    insert_notice("knu_main", i + 1, title_1[i], date_1[i], link_1[i])
 
 print('\n', "*" * 30, "학사공지", "*" * 30)
 for i in range(len(title_2)):
     print("Title", title_2[i])
     print("Date", date_2[i])
     print("Link", link_2[i])
-    insert("knu_ud", i + 1, title_2[i], date_2[i], link_2[i])
+    insert_notice("knu_ud", i + 1, title_2[i], date_2[i], link_2[i])

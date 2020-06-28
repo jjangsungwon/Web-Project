@@ -2,7 +2,9 @@ from flask import Flask, session, redirect, url_for, escape, request, render_tem
 ######(추후 삭제) 
 import requests
 from bs4 import BeautifulSoup
-######(추후 삭제) 
+
+######(추후 삭제)
+
 
 app = Flask(__name__)
 
@@ -57,6 +59,7 @@ for i in range(len(title_1)):
     print("Date", date_1[i])
     print("Link", link_1[i])
 
+
 ##########################################
 usr_id =''
 
@@ -91,7 +94,7 @@ def mealmenus():
 def sitelinks():
     return render_template("sitelink.html")        
 
-@app.route('/notice')
+@app.route('/notice', methods=[''])
 def notices():
     return render_template(
         "notice.html",
