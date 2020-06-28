@@ -87,19 +87,10 @@ def knu_to_db():
                1:-2] + "&btin.page=1&btin.search_type=&btin.search_text=&popupDeco=&btin.note_div=top&menu_idx=42"
         link_2.append(temp)
 
-    # 출력
-    print("*" * 30, "전체 공지사항", "*" * 30)
     for i in range(len(title_1)):
-        print("Title", title_1[i])
-        print("Date", date_1[i])
-        print("Link", link_1[i])
         insert_notice("knu_main", i + 1, title_1[i], date_1[i], link_1[i])
 
-    print('\n', "*" * 30, "학사공지", "*" * 30)
     for i in range(len(title_2)):
-        print("Title", title_2[i])
-        print("Date", date_2[i])
-        print("Link", link_2[i])
         insert_notice("knu_ud", i + 1, title_2[i], date_2[i], link_2[i])
 
 
@@ -136,5 +127,3 @@ def recruitment_to_db():
 department_to_db()
 knu_to_db()
 recruitment_to_db()
-
-print("done")

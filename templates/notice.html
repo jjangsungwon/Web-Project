@@ -117,19 +117,17 @@
                     <div id="news_content1" class="newsContentSection" style="display:block">
                         <ul>
                             {% for n in news_title %}
-                            <a href="">
                             <li>
-                                {{n}}
+                                <a href="{{n[1]}}" target="_sub">{{n[0]}}</a>
                             </li>
-                            </a>
                             {% endfor %}
                         </ul>
                     </div>
                     <div id="news_content2" class="newsContentSection" style="display:none">
                         <ul>
-                            {% for n in news_title %}
+                            {% for n in news_title2 %}
                             <li>
-                                {{n}}
+                                <a href="{{n[1]}}" target="_sub">{{n[0]}}</a>
                             </li>
                             {% endfor %}
                         </ul>
