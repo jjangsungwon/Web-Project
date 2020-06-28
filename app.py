@@ -6,10 +6,6 @@ from crawling import dbModule
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-grade = []
-design_count, required_count = 0, 0
-final_grade=[]
-
 ####### 학업 데이터 크롤링 코드 ##########
 LOGIN_URL = 'https://abeek.knu.ac.kr/Keess/comm/support/login/login.action'
 craw_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/list.action'
@@ -47,16 +43,13 @@ def index():
 
 @app.route('/acainfo')
 def acainfos():
-    global grade
-    global final_grade
-    global design_count, required_count
     if 'user.usr_id' in session:
         return render_template(
             "acainfo.html",
-            grade_array = grade,
-            final_grade = final_grade,
-            design_count = design_count,
-            required_count = required_count
+            grade_array = session['grade'],
+            final_grade = session['final_grade'],
+            design_count = session['design_count'],
+            required_count = session['required_count'],
             )
 
     else:
@@ -115,7 +108,9 @@ def loginProcess():
         params['user.usr_id'] = input_usr_id  # abeek 아이디
         params['user.passwd'] = input_usr_pw  # 비밀번호
 
-        global design_count, required_count
+        final_grade = []
+        grade = []
+        required_count, design_count = 0, 0
 
         with requests.Session() as s:
             login_req = s.post(LOGIN_URL, data=params)
@@ -124,6 +119,9 @@ def loginProcess():
 
             for i in soup.select('div.contents > div.contents_box > div.contents_body > div.info_table.mb_30 > table > tr > td'):
                 final_grade.append(i.text)
+
+            #세션에 저장
+            session['final_grade'] = final_grade
 
             # 교과목번호
             num = []
@@ -175,7 +173,12 @@ def loginProcess():
                     if num[i] in required.keys():
                         required_count += required[num[i]]
             print(design_count, required_count)
-            print(final_grade)        
+            print(final_grade)
+
+            #세션에 저장
+            session['design_count'] = design_count        
+            session['required_count'] = required_count
+            session['grade'] = grade          
 
             if len(grade) != 0 and design_count != 0 and required_count != 0:
                 session['user.usr_id'] = input_usr_id 
@@ -194,14 +197,11 @@ def logins():
 
 @app.route('/logout')
 def logouts():
-    global grade
-    global final_grade
-    global design_count, required_count
-
     session.pop('user.usr_id', None)
-    grade=[]
-    final_grade=[]
-    design_count, required_count = 0, 0
+    session.pop('required_count', None)
+    session.pop('grade', None)
+    session.pop('design_count', None)
+    session.pop('final_grade', None)
 
     return redirect('/')           
 
