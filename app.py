@@ -2,6 +2,7 @@ from flask import Flask, session, redirect, url_for, escape, request, render_tem
 import requests
 from bs4 import BeautifulSoup
 from crawling import dbModule
+from crawling.Diet import culture, nuri, cheomseong
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -63,7 +64,11 @@ def acainfos():
 
 @app.route('/mealmenu')
 def mealmenus():
-    return render_template("mealmenu.html")    
+    return render_template("mealmenu.html",
+                           culture=culture,
+                           nuri=nuri,
+                           cheomseong=cheomseong
+                           )
 
 
 @app.route('/sitelink')
