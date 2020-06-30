@@ -228,7 +228,7 @@
             color:white;
             background-color: rgb(96, 134, 126);">전체 학점 계산기</p>
             <div id="convertDiv" style="margin-top:10px; text-align:center;">
-                <p style="text-align:center">과목명, 점수, 학점을 입력하면 새롭게 계산된 총 평점을 알 수 있습니다. </p>
+                <p style="text-align:center">과목명, 점수, 학점을 입력하면 기존 성적에 추가된 새로운 평점을 알 수 있습니다. </p>
 
                 <table class="table table-hover" style="width:100%">
                     <thead>
@@ -563,11 +563,15 @@
                         계산결과
                     </tr>
                     <thead>
-                        <th style="font-size:20px; text-align:center" width="50%">이수학점</th>
-                        <th style="font-size:20px; text-align:center" width="50%">평점</th>
+                        <th style="font-size:20px; text-align:center" width="33%">이번학기 학점</th>
+                        <th style="font-size:20px; text-align:center" width="33%">이수학점</th>
+                        <th style="font-size:20px; text-align:center" width="33%">평점</th>
                     </thead>
                     <tbody>
-                        <tr style="font-size: 15px; text-align:center">
+                        <tr style="font-size: 17px; text-align:center">
+                            <td>
+                                <span id="result_nowdeg" style="color:rgb(114, 50, 50)"></span>
+                            </td>
                             <td>
                                 <span id="result_sumdeg" style="color:teal"></span>
                             </td>
