@@ -3,6 +3,7 @@
 </h1>
 
 <h2 align="center"> 컴퓨터학부 학생 종합정보시스템</h2>
+![layout](https://user-images.githubusercontent.com/41226054/86128565-7edb4880-bb1c-11ea-8860-40ef36ac5b5a.PNG)  
 
 # 💡 기능 
 ✔ 　본관 전체공지 정보 제공       
