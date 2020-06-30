@@ -468,9 +468,94 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <button class="btn btn-success">계산하기</button>
+                            <button class="btn btn-success" onclick="score()">계산하기</button>
                         </td>
                     </tr>
+                    <script>
+                        function score(){
+                            var inputScore1 = document.getElementById('subject_select1'),
+                                inputScore2 = document.getElementById('subject_select2'),
+                                inputScore3 = document.getElementById('subject_select3'),
+                                inputScore4 = document.getElementById('subject_select4'),
+                                inputScore5 = document.getElementById('subject_select5'),
+                                inputScore6 = document.getElementById('subject_select6'),
+                                inputScore7 = document.getElementById('subject_select7'),
+                                inputScore8 = document.getElementById('subject_select8');
+
+                            var credit1 = document.getElementById('subject_degree1'),
+                                credit2 = document.getElementById('subject_degree2'),
+                                credit3 = document.getElementById('subject_degree3'),
+                                credit4 = document.getElementById('subject_degree4'),
+                                credit5 = document.getElementById('subject_degree5'),
+                                credit6 = document.getElementById('subject_degree6'),
+                                credit7 = document.getElementById('subject_degree7'),
+                                credit8 = document.getElementById('subject_degree8');
+
+                            // 배열 추가
+                            var credit = [Number(credit1.value), Number(credit2.value), Number(credit3.value), Number(credit4.value),
+                                        ,Number(credit5.value), Number(credit6.value), Number(credit7.value), Number(credit8.value)];
+                            var total_score = 0;
+                            var score = [inputScore1.value, inputScore2.value, inputScore3.value, inputScore4.value,
+                                        inputScore5.value, inputScore6.value, inputScore7.value, inputScore8.value];
+                            var sum = 0;
+
+                            for (var i = 0; i < 8; i++){
+                                try{
+                                    if (score[i] == 1){
+                                        total_score += 4.3 * credit[i];
+                                        sum += credit[i];
+                                    } else if (score[i] == 2){
+                                        total_score += 4.0 * credit[i];
+                                        sum += credit[i];
+                                    } else if (score[i] == 3){
+                                        total_score += 3.7 * credit[i];
+                                        sum += credit[i];
+                                    } else if (score[i] == 4){
+                                        total_score += 3.3 * credit[i];
+                                        sum += credit[i];
+                                    } else if (score[i] == 5){
+                                        total_score += 3.0 * credit[i];
+                                        sum += credit[i];
+                                    } else if (score[i] == 6){
+                                        total_score += 2.7 * credit[i];
+                                        sum += credit[i];
+                                    } else if (score[i] == 7){
+                                        total_score += 2.3 * credit[i];
+                                        sum += credit[i];
+                                    } else if (score[i] == 8){
+                                        total_score += 2.0 * credit[i];
+                                        sum += credit[i];
+                                    } else if (score[i] == 9){
+                                        total_score += 1.7 * credit[i];
+                                        sum += credit[i];
+                                    } else if (score[i] == 10){
+                                        total_score += 1.3 * credit[i];
+                                        sum += credit[i];
+                                    } else if (score[i] == 11){
+                                        total_score += 1.0 * credit[i];
+                                        sum += credit[i];
+                                    } else if (score[i] == 12){
+                                        total_score += 0.7 * credit[i];
+                                        sum += credit[i];
+                                    } else {
+                                        continue;
+                                    }
+                                }
+                                catch(e){
+                                    continue;
+                                }
+                            }
+
+                            var num = Number({{final_grade[0]}}) + sum;
+                            var grade = ({{final_grade[0]}} * {{final_grade[1]}} + total_score ) / num;
+                            var result = document.getElementById('result_sumdeg');
+                            var deg = document.getElementById('result_deg');
+
+                            //result.innerHTML = "테스트";
+                            result.innerHTML = num + "/150";
+                            deg.innerHTML = grade.toFixed(2) + "/4.3";
+                        }
+                    </script>
                 </table>
                 <!-- 계산 결과 테이블 -->
                 <table class="table table-hover">
@@ -484,10 +569,10 @@
                     <tbody>
                         <tr style="font-size: 15px; text-align:center">
                             <td>
-                                <span id="result_sumdeg" style="color:teal"></span> / 150
+                                <span id="result_sumdeg" style="color:teal"></span>
                             </td>
                             <td>
-                                <span id="result_deg" style="color:rgb(21, 79, 185)"></span> / 4.3
+                                <span id="result_deg" style="color:rgb(21, 79, 185)"></span>
                             </td>
                         </tr>
                     </tbody>
