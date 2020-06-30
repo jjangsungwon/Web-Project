@@ -550,8 +550,10 @@
                             var grade = ({{final_grade[0]}} * {{final_grade[1]}} + total_score ) / num;
                             var result = document.getElementById('result_sumdeg');
                             var deg = document.getElementById('result_deg');
+                            var now_result = document.getElementById('result_nowdeg');
 
                             //result.innerHTML = "테스트";
+                            now_result.innerHTML = (total_score/sum).toFixed(2);
                             result.innerHTML = num + "/150";
                             deg.innerHTML = grade.toFixed(2) + "/4.3";
                         }
