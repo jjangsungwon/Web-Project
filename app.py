@@ -185,8 +185,8 @@ def loginProcess():
                     if num[i] in required.keys():
                         required_count += required[num[i]][0]
                         required_check.append(required[num[i]][1])
-            print(design_count, required_count)
-            print(final_grade)
+#            print(design_count, required_count)
+#            print(final_grade)
 
             for key in design.keys():
                 if design[key][1] not in design_check:
@@ -195,8 +195,8 @@ def loginProcess():
                 if required[key][1] not in required_check:
                     no_required.append(required[key][1])
 
-            print(no_design)
-            print(no_required)
+ #           print(no_design)
+ #           print(no_required)
             #세션에 저장
             session['design_count'] = design_count        
             session['required_count'] = required_count
