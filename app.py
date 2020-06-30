@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*- 
 from flask import Flask, session, redirect, url_for, escape, request, render_template
 import requests
 from bs4 import BeautifulSoup
