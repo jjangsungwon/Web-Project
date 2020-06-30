@@ -492,11 +492,9 @@
                                 credit8 = document.getElementById('subject_degree8');
 
                             // 배열 추가
-                            var credit = [Number(credit1.value), Number(credit2.value), Number(credit3.value), Number(credit4.value),
-                                        ,Number(credit5.value), Number(credit6.value), Number(credit7.value), Number(credit8.value)];
+                            var credit = [Number(credit1.value), Number(credit2.value), Number(credit3.value), Number(credit4.value), Number(credit5.value), Number(credit6.value), Number(credit7.value), Number(credit8.value)];
                             var total_score = 0;
-                            var score = [inputScore1.value, inputScore2.value, inputScore3.value, inputScore4.value,
-                                        inputScore5.value, inputScore6.value, inputScore7.value, inputScore8.value];
+                            var score = [inputScore1.value, inputScore2.value, inputScore3.value, inputScore4.value, inputScore5.value, inputScore6.value, inputScore7.value, inputScore8.value];
                             var sum = 0;
 
                             for (var i = 0; i < 8; i++){
@@ -556,6 +554,7 @@
                             now_result.innerHTML = (total_score/sum).toFixed(2);
                             result.innerHTML = num + "/150";
                             deg.innerHTML = grade.toFixed(2) + "/4.3";
+
                         }
                     </script>
                 </table>
