@@ -233,9 +233,11 @@ def logouts():
     return redirect('/')           
 
 @app.before_request
-def force_https():
-    if request.endpoint in app.view_functions and not request.is_secure:
-        return redirect(request.url.replace('http://', 'https://'))
+def before_request():
+    if request.url.startswith('http://'):
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=443, debug=True, ssl_context=('./cert/server.crt', './cert/server.key'))
