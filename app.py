@@ -228,7 +228,6 @@ def logouts():
     session.pop('final_grade', None)
     session.pop('no_required', None)
     session.pop('no_design', None)
-
     return redirect('/')           
 
 if __name__ == '__main__':
