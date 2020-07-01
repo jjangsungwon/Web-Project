@@ -11,9 +11,9 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 ####### 학업 데이터 크롤링 코드 ##########
 LOGIN_URL = 'https://abeek.knu.ac.kr/Keess/comm/support/login/login.action'
-craw_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/list.action'
-design_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/designPart.action'
-must_url = 'http://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/essentPart.action'
+craw_url = 'https://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/list.action'
+design_url = 'https://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/designPart.action'
+must_url = 'https://abeek.knu.ac.kr/Keess/kees/web/stue/stueStuRecEnq/essentPart.action'
 
 # 설계과목
 design = {'COMP205': [2, '기초창의공학설계'], 'COMP217': [2, '자바프로그래밍'], 'ELEC462': [2, '시스템프로그래밍'],
@@ -232,7 +232,10 @@ def logouts():
     session.pop('no_design', None)
     return redirect('/')           
 
-Talisman(app)
+@app.before_request
+def force_https():
+    if request.endpoint in app.view_functions and not request.is_secure:
+        return redirect(request.url.replace('http://', 'https://'))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=443, debug=True, ssl_context=('./cert/server.crt', './cert/server.key'))
