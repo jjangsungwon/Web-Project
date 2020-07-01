@@ -22,7 +22,7 @@
 ✔ 　학점 예상 기능 제공  
 <br/>
 # 🎬 데모 영상
-![인트로](https://user-images.githubusercontent.com/41226054/86245296-3c7d3e80-bbe4-11ea-86cf-679cc28d7dca.png)
+[![데모영상](https://user-images.githubusercontent.com/41226054/86245296-3c7d3e80-bbe4-11ea-86cf-679cc28d7dca.png)](https://youtu.be/Br_qtPWeV7c)
 
 # 🚀 사용 방법
 http://knupuzzle.site/ 사이트에 접속하시면 됩니다.
