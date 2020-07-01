@@ -3,10 +3,8 @@ import requests
 from bs4 import BeautifulSoup
 from crawling import dbModule
 from crawling.Diet import culture, nuri, cheomseong
-from flask_sslify import SSLify
 
 app = Flask(__name__)
-#sslify = SSLify(app)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 ####### 학업 데이터 크롤링 코드 ##########
@@ -232,6 +230,5 @@ def logouts():
     session.pop('no_design', None)
     return redirect('/')           
 
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='80', debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True))
