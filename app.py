@@ -6,7 +6,6 @@ from crawling.Diet import culture, nuri, cheomseong
 from flask_talisman import Talisman
 
 app = Flask(__name__)
-
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 ####### 학업 데이터 크롤링 코드 ##########
@@ -232,12 +231,7 @@ def logouts():
     session.pop('no_design', None)
     return redirect('/')           
 
-@app.before_request
-def before_request():
-    if request.url.startswith('http://'):
-        url = request.url.replace('http://', 'https://', 1)
-        code = 301
-        return redirect(url, code=code)
+Talisman(app, content_security_policy=None)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=443, debug=True, ssl_context=('./cert/server.crt', './cert/server.key'))
